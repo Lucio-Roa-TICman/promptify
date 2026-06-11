@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Promptify · Ejercicios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- ===================== SIDEBAR ===================== -->
+    <aside class="sidebar">
+      <div class="sidebar__head">
+        <div class="brand"><span class="brand__mark"></span> Promptify</div>
+        <div class="sidebar__sub">Mastering Prompts · Lvl 12</div>
+      </div>
+      <a class="nav-item">🚀 Introduction</a>
+      <a class="nav-item is-active">💡 Core Principles</a>
+      <a class="nav-subitem">Estructura de prompt</a>
+      <a class="nav-subitem is-active">Técnicas de Prompting</a>
+      <a class="nav-subitem">Qué escribir</a>
+      <a class="nav-item">⚡ Advanced Techniques</a>
+      <a class="nav-item">🛡 Security &amp; Ethics</a>
+      <div class="sidebar__foot">
+        <div class="card" style="padding:var(--sp-4)">🔥 12 Day Streak</div>
+        <span class="badge badge--pink" style="background:var(--grad-pink);color:#fff;border:none">LEVEL: MASTER</span>
+      </div>
+    </aside>
+
+    <!-- ===================== MAIN ===================== -->
+    <main class="main">
+      <div class="container stack" style="gap:var(--sp-16)">
+
+        <!-- ============ TIPO 1 · SELECCIÓN ============ -->
+        <section class="stack">
+          <div class="row">
+            <span class="badge badge--blue">TÉCNICAS DE PROMPTING</span>
+            <span class="badge badge--pink">SCORE: 73/100</span>
+          </div>
+          <h1 class="title-screen">Laboratorio Práctico</h1>
+          <p class="text-muted">Aplica los conceptos de claridad, contexto y restricciones (C.L.A.R.A.) en estos escenarios simulados.</p>
+
+          <div class="panel stack">
+            <p class="text-muted">Tu objetivo es generar un plan de contenido semanal para Instagram enfocado en una panadería artesanal. Selecciona el prompt inicial más efectivo.</p>
+
+            <label class="option">
+              <span class="option__radio"></span>
+              <span>
+                <span class="option__title">Opción A: Genérico</span>
+                <span class="option__desc">"Dame ideas para posts de Instagram para una panadería."</span>
+              </span>
+            </label>
+
+            <label class="option is-selected">
+              <span class="option__radio"></span>
+              <span>
+                <span class="option__title">Opción B: Estructurado (C.L.A.R.A.)</span>
+                <span class="option__desc">"Actúa como un Social Media Manager. Crea un plan de contenido de 7 días para 'El Horno Mágico'. Incluye: tipo de post, texto sugerido y 3 hashtags."</span>
+              </span>
+              <span class="option__check">✓</span>
+            </label>
+
+            <label class="option">
+              <span class="option__radio"></span>
+              <span>
+                <span class="option__title">Opción C: Sobrecargado</span>
+                <span class="option__desc">"Quiero posts para mi panadería, hacemos pan de masa madre, croissants..."</span>
+              </span>
+            </label>
+
+            <div class="row between">
+              <button class="btn btn--ghost btn--sm">↺ Rehacer</button>
+              <button class="btn btn--primary">SIGUIENTE LECCIÓN →</button>
+            </div>
+          </div>
+
+          <div class="panel panel--accent-left row between">
+            <div class="ai-feedback">
+              <span class="ai-feedback__avatar">🤖</span>
+              <div>
+                <div class="ai-feedback__label">CLAUDE · INSTRUCTOR AI</div>
+                <div class="ai-feedback__text">"Excelente identificación. Las contradicciones internas son la causa #1 de alucinaciones en modelos de lenguaje. Mantener la coherencia es vital."</div>
+              </div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-size:var(--fs-2xl);font-weight:var(--fw-bold);color:var(--pink)">73/100</div>
+              <div class="stat__label">PUNTAJE GLOBAL</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ TIPO 2 · ANÁLISIS CRÍTICO ============ -->
+        <section class="stack">
+          <span class="badge badge--blue">EJERCICIO · ANÁLISIS CRÍTICO</span>
+          <div class="row between">
+            <h2 class="title-screen">Ejercicio 3: Análisis Crítico</h2>
+            <div class="stat" style="text-align:right">
+              <div class="stat__value stat__value--pink">73/100</div>
+              <div class="stat__label">PUNTUACIÓN</div>
+            </div>
+          </div>
+          <p class="text-muted">Revisa los siguientes prompts y selecciona el que mejor aplica la metodología CLARA (Contexto, Longitud, Audiencia, Rol, Acción).</p>
+
+          <div class="panel panel--accent-left" data-accent="pink">
+            <div class="badge badge--pink" style="border:none;background:none;padding:0">🟣 PISTA DEL SISTEMA</div>
+            <p class="text-muted" style="margin-top:var(--sp-2)">Busca el equilibrio entre contexto suficiente y brevedad ejecutable.</p>
+          </div>
+
+          <label class="option">
+            <span class="option__radio"></span>
+            <span><span class="option__title">Escribe un artículo sobre computación cuántica.</span>
+            <span class="option__desc">Demasiado vago: sin rol, sin audiencia, sin formato.</span></span>
+          </label>
+          <label class="option is-selected">
+            <span class="option__radio"></span>
+            <span><span class="option__title">Actúa como un profesor universitario de física. Escribe una introducción de 300 palabras sobre computación cuántica para estudiantes de primer año, usando analogías cotidianas.</span>
+            <span class="option__desc" style="color:var(--blue-light)">✓ Rol + audiencia + longitud + acción. CLARA completo.</span></span>
+            <span class="option__check">✓</span>
+          </label>
+          <label class="option">
+            <span class="option__radio"></span>
+            <span><span class="option__title">Necesito un post para LinkedIn que se vuelva viral y tenga muchos likes. Usa emojis y hashtags. Hazlo rápido.</span>
+            <span class="option__desc">Objetivo vanidoso ('viral'), sin control de contenido.</span></span>
+          </label>
+          <label class="option">
+            <span class="option__radio"></span>
+            <span><span class="option__title">Hola, por favor, si no es mucha molestia, ¿podrías crear un texto sobre los qubits? Gracias de antemano.</span>
+            <span class="option__desc">Cortesía excesiva = ruido. Falta especificación técnica.</span></span>
+          </label>
+
+          <div class="row between">
+            <button class="btn btn--ghost btn--sm">↺ Rehacer</button>
+            <button class="btn btn--primary">SIGUIENTE EJERCICIO →</button>
+          </div>
+        </section>
+
+        <!-- ============ TIPO 3 · CONSTRUCCIÓN GUIADA ============ -->
+        <section class="stack">
+          <span class="badge badge--pink">EJERCICIO · CONSTRUCCIÓN</span>
+          <h2 class="title-screen">La Fórmula Maestra</h2>
+          <p class="text-muted">Rol + Contexto + Objetivo + Formato + Restricciones. Completa cada campo para construir un prompt de alto rendimiento.</p>
+
+          <div class="row" style="align-items:flex-start;gap:var(--sp-6)">
+            <!-- formulario -->
+            <div class="panel stack" style="flex:1">
+              <h3 style="font-size:var(--fs-xl);font-weight:var(--fw-bold)">≣ Ejercicio 5: Construcción Guiada</h3>
+              <div class="grid-2">
+                <div class="field">
+                  <div class="row between"><span class="field__label field__label--blue">ROL</span><span class="field__hint">¿Quién es la IA?</span></div>
+                  <input class="input" value="Un tutor experto en Data Science" />
+                </div>
+                <div class="field">
+                  <div class="row between"><span class="field__label field__label--pink">AUDIENCIA</span><span class="field__hint">¿Para quién?</span></div>
+                  <input class="input" value="Principiante absoluto sin código" />
+                </div>
+              </div>
+              <div class="field">
+                <div class="row between"><span class="field__label field__label--blue">OBJETIVO</span><span class="field__hint">¿Qué debe lograr?</span></div>
+                <textarea class="textarea">Entender cómo funcionan los bucles for y aplicarlos a una lista de nombres</textarea>
+              </div>
+              <div class="grid-2">
+                <div class="field">
+                  <span class="field__label field__label--pink">FORMATO</span>
+                  <input class="input" value="Una tabla comparativa con ejemplos" />
+                </div>
+                <div class="field">
+                  <span class="field__label field__label--blue">RESTRICCIONES</span>
+                  <input class="input" value="No usar librerías externas" />
+                </div>
+              </div>
+              <div class="row between">
+                <span class="badge badge--success" style="border:none;background:none;padding:0">● Analizando estructura en tiempo real...</span>
+                <button class="btn btn--accent">SOMETER A EVALUACIÓN ⚡</button>
+              </div>
+            </div>
+            <!-- panel evaluación -->
+            <div class="stack" style="width:360px;flex:none">
+              <div class="panel" style="text-align:center">
+                <div class="stat__label" style="text-align:left">CURRENT ACCURACY</div>
+                <div class="ring" style="--val:95;--ring-color:var(--pink);width:150px;height:150px;margin:var(--sp-4) auto">
+                  <span style="font-size:var(--fs-3xl);font-weight:var(--fw-bold)">95</span>
+                </div>
+                <p class="text-muted">Sólido. Estás muy cerca de la maestría.</p>
+              </div>
+              <div class="panel panel--accent-left">
+                <div class="ai-feedback">
+                  <span class="ai-feedback__avatar" style="width:44px;height:44px">🤖</span>
+                  <div><div class="ai-feedback__label">INSTRUCTOR IA</div><div class="sidebar__sub">Análisis en vivo</div></div>
+                </div>
+                <div class="card" style="margin-top:var(--sp-4)"><p class="text-muted" style="font-size:var(--fs-sm)">"Excelente definición de Restricciones. Limitar las librerías obliga al modelo a explicar la lógica pura de Python."</p></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ TIPO 4 · PROMPT VISUAL ============ -->
+        <section class="stack">
+          <div class="row between">
+            <h2 class="title-screen">Ejercicio 4: El Arte del Prompt Visual</h2>
+            <div class="stat" style="text-align:right"><div class="stat__value stat__value--pink">8,450</div><div class="stat__label">🏆 GLOBAL SCORE</div></div>
+          </div>
+          <p class="text-muted">Configura los parámetros para generar imágenes de alta fidelidad.</p>
+
+          <div class="row" style="align-items:flex-start;gap:var(--sp-6)">
+            <div class="stack" style="flex:1">
+              <div class="panel">
+                <div class="row between"><span class="field__label">BASE CONCEPT</span><span class="badge badge--teal">/imagine prompt</span></div>
+                <textarea class="textarea" style="min-height:180px;margin-top:var(--sp-4)" placeholder="Describe el sujeto principal y la escena aquí..."></textarea>
+                <div class="row between" style="margin-top:var(--sp-3)"><span class="text-dim">🎤 🖼 ⚙</span><span class="text-dim" style="font-size:var(--fs-xs)">0 / 500 chars</span></div>
+              </div>
+              <div>
+                <div class="stat__label">STYLE TOKENS</div>
+                <div class="row" style="flex-wrap:wrap;margin-top:var(--sp-3)">
+                  <span class="chip is-active">Cinematic Lighting</span>
+                  <span class="chip is-active">8k Resolution</span>
+                  <span class="chip">Depth of Field</span>
+                  <span class="chip">Cyberpunk Aesthetic</span>
+                  <span class="chip">Unreal Engine 5</span>
+                  <span class="chip">Volumetric Fog</span>
+                  <span class="chip is-active">--ar 16:9</span>
+                  <span class="chip is-active">--v 6.0</span>
+                </div>
+              </div>
+            </div>
+            <div class="stack" style="width:360px;flex:none">
+              <div class="panel panel--accent-left">
+                <div class="ai-feedback">
+                  <span class="ai-feedback__avatar" style="width:40px;height:40px">🟣</span>
+                  <div><div class="ai-feedback__label">Claude's Analysis</div><div class="sidebar__sub">Sugerencias en vivo</div></div>
+                </div>
+                <p class="text-muted" style="font-size:var(--fs-sm);margin-top:var(--sp-3)">Las descripciones de iluminación específicas mejoran los resultados un 40%. Considera añadir 'rim lighting' o 'golden hour'.</p>
+                <div class="row" style="margin-top:var(--sp-4)">
+                  <span class="badge badge--warning">⚠ Lighting: Missing</span>
+                  <span class="chip is-active">✓ Subject: Strong</span>
+                </div>
+              </div>
+              <div class="card" style="height:200px;display:grid;place-items:center"><span class="text-dim">🖼 Awaiting generation...</span></div>
+            </div>
+          </div>
+          <div class="row between">
+            <button class="btn btn--ghost">⚡ ENVIAR A MIDJOURNEY</button>
+            <button class="btn btn--primary">SIGUIENTE MÓDULO →</button>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+</body>
+</html>
