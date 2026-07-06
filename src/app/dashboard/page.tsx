@@ -1,18 +1,35 @@
 "use client"; // Este componente corre en el navegador (cliente), no en el servidor
 
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link"; // Para navegar entre páginas sin recargar
 import { Navbar } from "@/components/Navbar"; // Barra de navegación superior
 import { ProgressRing } from "@/components/ProgressRing"; // Anillo visual de progreso
 import { Reveal } from "@/components/Reveal"; // Wrapper que anima la aparición del contenido
-import { MODULES, TOTAL_MODULES, MOCK_USER } from "@/data/course"; // Datos del curso (mock)
-import { getCompleted } from "@/lib/mockStore"; // Función que trae los módulos completados (mock)
+import { MODULES, TOTAL_MODULES } from "@/data/course";
+import { getCompleted } from "@/lib/progressStore"; // Trae los módulos completados desde la base
+import { useSession } from "@/lib/auth-client"; // Sesión real de better-auth
 
 export default function DashboardPage() {
-  // TODO BACK: reemplazar MOCK_USER por la sesión real,
-  // y getCompleted() por el progreso real leído de la base.
-  const user = MOCK_USER; // Usuario actual (de prueba)
-  const completed = getCompleted(); // Slugs de módulos ya completados
+  const router = useRouter();
+  const { data: session, isPending: sessionLoading } = useSession();
+  const [completed, setCompleted] = useState<string[] | null>(null);
 
+  useEffect(() => {
+    if (!sessionLoading && !session) {
+      router.push("/login");
+    }
+  }, [sessionLoading, session, router]);
+
+  useEffect(() => {
+    if (session) getCompleted().then(setCompleted);
+  }, [session]);
+
+  if (sessionLoading || !session || completed === null) {
+    return <div className="min-h-screen" />;
+  }
+
+  const user = session.user;
   const done = completed.length; // Cuántos módulos completó
   const pct = Math.round((done / TOTAL_MODULES) * 100); // Porcentaje de avance
   const finished = done >= TOTAL_MODULES; // Si ya terminó todo el curso

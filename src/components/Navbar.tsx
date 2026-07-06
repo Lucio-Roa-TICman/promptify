@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Wordmark } from "./MoonLogo";
+import { authClient } from "@/lib/auth-client";
 
 export function Navbar({
   userName,
@@ -19,9 +20,10 @@ export function Navbar({
     { href: "/certificado", label: "Certificado", key: "certificado" },
   ];
 
-  // TODO BACK: reemplazar por signOut() real de better-auth.
-  function handleSignOut() {
+  async function handleSignOut() {
+    await authClient.signOut();
     router.push("/login");
+    router.refresh();
   }
 
   return (

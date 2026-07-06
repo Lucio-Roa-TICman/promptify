@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { AuthShell } from "@/components/AuthShell";
+import { authClient } from "@/lib/auth-client";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -11,17 +12,39 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+
     if (name.trim().length < 2) {
       setError("Ingresá tu nombre (aparecerá en tu certificado).");
       return;
     }
-    // TODO BACK: reemplazar por signUp.email() de better-auth.
-    // El nombre (name) es el que se usa luego en el certificado.
+
+    setLoading(true);
+    // El nombre queda guardado en la tabla "user" y es el que se usa
+    // luego en el dashboard, la navbar y el certificado.
+    const { error: signUpError } = await authClient.signUp.email({
+      name: name.trim(),
+      email,
+      password,
+    });
+
+    setLoading(false);
+
+    if (signUpError) {
+      setError(
+        signUpError.code === "USER_ALREADY_EXISTS"
+          ? "Ya existe una cuenta con ese email. Probá iniciar sesión."
+          : signUpError.message ?? "No se pudo crear la cuenta."
+      );
+      return;
+    }
+
     router.push("/dashboard");
+    router.refresh();
   }
 
   return (
@@ -68,11 +91,11 @@ export default function RegisterPage() {
           <input
             type="password"
             required
-            minLength={6}
+            minLength={8}
             className="input-field"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Mínimo 6 caracteres"
+            placeholder="Mínimo 8 caracteres"
             autoComplete="new-password"
           />
         </div>
@@ -83,8 +106,8 @@ export default function RegisterPage() {
           </p>
         )}
 
-        <button type="submit" className="btn btn-primary w-full">
-          Crear cuenta
+        <button type="submit" disabled={loading} className="btn btn-primary w-full disabled:opacity-60">
+          {loading ? "Creando cuenta…" : "Crear cuenta"}
         </button>
       </form>
     </AuthShell>

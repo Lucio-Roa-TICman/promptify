@@ -1,20 +1,6 @@
-// Contenido del curso + datos de ejemplo (mock).
-// Los comentarios "TODO BACK" marcan qué conectar al backend.
-
-// ---------- USUARIO DE EJEMPLO ----------
-// TODO BACK: reemplazar por la sesión real de better-auth.
-export const MOCK_USER = {
-  name: "Lucio Roa",
-  email: "lucio@ejemplo.com",
-};
-
-// ---------- PROGRESO DE EJEMPLO ----------
-// TODO BACK: reemplazar por el progreso real leído de la base.
-// completedModules: slugs de módulos terminados.
-export const MOCK_PROGRESS = {
-  completedModules: ["introduccion", "elementos"] as string[],
-  completedAt: null as string | null,
-};
+// Contenido del curso.
+// El usuario sale de la sesión real (better-auth, ver src/lib/auth-client.ts)
+// y el progreso se lee/escribe en la base (ver src/lib/progressStore.ts).
 
 // ============================================================
 //  CONTENIDO DEL CURSO (real, editable)

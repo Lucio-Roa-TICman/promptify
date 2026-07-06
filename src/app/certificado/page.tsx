@@ -1,16 +1,33 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Certificate } from "@/components/Certificate";
 import { Reveal } from "@/components/Reveal";
-import { MOCK_USER, TOTAL_MODULES } from "@/data/course";
-import { getCompleted } from "@/lib/mockStore";
+import { TOTAL_MODULES } from "@/data/course";
+import { getCompleted } from "@/lib/progressStore";
+import { useSession } from "@/lib/auth-client";
 
 export default function CertificadoPage() {
-  // TODO BACK: usar sesión real y progreso real.
-  const user = MOCK_USER;
-  const completed = getCompleted();
+  const router = useRouter();
+  const { data: session, isPending: sessionLoading } = useSession();
+  const [completed, setCompleted] = useState<string[] | null>(null);
+
+  useEffect(() => {
+    if (!sessionLoading && !session) router.push("/login");
+  }, [sessionLoading, session, router]);
+
+  useEffect(() => {
+    if (session) getCompleted().then(setCompleted);
+  }, [session]);
+
+  if (sessionLoading || !session || completed === null) {
+    return <div className="min-h-screen" />;
+  }
+
+  const user = session.user;
   const finished = completed.length >= TOTAL_MODULES;
 
   return (

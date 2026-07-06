@@ -1,28 +1,38 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { MODULES, TOTAL_MODULES, MOCK_USER } from "@/data/course";
+import { MODULES, TOTAL_MODULES } from "@/data/course";
 import { Navbar } from "@/components/Navbar";
 import { ExerciseRunner } from "@/components/ExerciseRunner";
-import { getCompleted, completeModule } from "@/lib/mockStore";
+import { getCompleted, completeModule } from "@/lib/progressStore";
+import { useSession } from "@/lib/auth-client";
 
 export function CourseClient() {
   const router = useRouter();
   const params = useSearchParams();
   const requested = params.get("m");
+  const { data: session, isPending: sessionLoading } = useSession();
 
   const initialSlug =
     requested && MODULES.some((m) => m.slug === requested) ? requested : MODULES[0].slug;
 
   const [activeSlug, setActiveSlug] = useState(initialSlug);
-  const [completed, setCompleted] = useState<string[]>(getCompleted());
+  const [completed, setCompleted] = useState<string[] | null>(null);
   const [solved, setSolved] = useState(false);
+
+  useEffect(() => {
+    if (!sessionLoading && !session) router.push("/login");
+  }, [sessionLoading, session, router]);
+
+  useEffect(() => {
+    if (session) getCompleted().then(setCompleted);
+  }, [session]);
 
   const active = MODULES.find((m) => m.slug === activeSlug) ?? MODULES[0];
   const activeIndex = MODULES.findIndex((m) => m.slug === active.slug);
   const isLast = activeIndex === MODULES.length - 1;
-  const canComplete = !active.exercise || solved || completed.includes(active.slug);
+  const canComplete = !active.exercise || solved || (completed?.includes(active.slug) ?? false);
 
   function select(slug: string) {
     setActiveSlug(slug);
@@ -30,9 +40,8 @@ export function CourseClient() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  function handleComplete() {
-    // TODO BACK: reemplazar por la server action real que guarda en Neon.
-    const res = completeModule(active.slug);
+  async function handleComplete() {
+    const res = await completeModule(active.slug);
     setCompleted(res.completed);
 
     if (res.finished && res.completed.length >= TOTAL_MODULES) {
@@ -44,9 +53,13 @@ export function CourseClient() {
     else router.push("/dashboard");
   }
 
+  if (sessionLoading || !session || completed === null) {
+    return <div className="min-h-screen" />;
+  }
+
   return (
     <div className="min-h-screen">
-      <Navbar userName={MOCK_USER.name} active="curso" />
+      <Navbar userName={session.user.name} active="curso" />
 
       <div className="mx-auto flex max-w-6xl gap-8 px-6 py-10">
         {/* Sidebar */}
