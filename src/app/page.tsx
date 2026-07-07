@@ -2,192 +2,364 @@ import Link from "next/link";
 import { MoonLogo, Wordmark } from "@/components/MoonLogo";
 import { Reveal } from "@/components/Reveal";
 import { LandingNav } from "@/components/LandingNav";
+import { MODULES } from "@/data/course";
+
+const PIECES = [
+  {
+    label: "Contexto",
+    color: "text-blue-light",
+    border: "border-blue-light/30",
+    chip: "bg-blue-light/10",
+    fragment: "Soy diseñador gráfico con 2 años de experiencia en Argentina.",
+    detail: "Quién sos y qué situación rodea la tarea. Lo que la IA no puede adivinar.",
+  },
+  {
+    label: "Instrucción",
+    color: "text-text",
+    border: "border-line-strong",
+    chip: "bg-white/5",
+    fragment: "Dame 5 ideas de negocio freelance con baja inversión.",
+    detail: "La tarea, clara y directa. Cuánto querés y hacia dónde apunta.",
+  },
+  {
+    label: "Formato",
+    color: "text-pink",
+    border: "border-pink/30",
+    chip: "bg-pink/10",
+    fragment: "Presentalas en una lista numerada, cada una con su justificación.",
+    detail: "La forma de la respuesta: lista, tabla, tono. La forma también comunica.",
+  },
+];
+
+const FAQS = [
+  {
+    q: "¿Necesito saber programar?",
+    a: "No. El curso está pensado para personas que ya usan IA en el día a día pero sienten que podrían sacarle más provecho. Solo necesitás saber escribir.",
+  },
+  {
+    q: "¿Cuánto tiempo lleva?",
+    a: "Alrededor de 20 minutos. Son 7 módulos cortos, cada uno con su práctica, y podés pausar y retomar cuando quieras: tu progreso queda guardado.",
+  },
+  {
+    q: "¿La práctica es real o solo teoría?",
+    a: "Cada módulo termina con un ejercicio: ordenar las piezas de un prompt, elegir el mejor entre varios, o reescribir uno vago. Aprendés haciendo.",
+  },
+  {
+    q: "¿Recibo un certificado?",
+    a: "Sí. Al completar los 7 módulos se desbloquea tu certificado personalizado con tu nombre, descargable en PDF.",
+  },
+];
 
 export default function Home() {
   return (
     <div className="min-h-screen overflow-x-hidden">
-      <LandingNav /> {/* Barra de navegación de la landing */}
+      <LandingNav />
 
-      {/* ---------- HERO ---------- */}
-      <header className="relative pt-[160px] pb-[140px] text-center">
-        {/* glow de fondo */}
+      {/* HERO */}
+      <header className="relative pt-[150px] pb-24 text-center">
         <div
           className="pointer-events-none absolute left-1/2 top-[-10%] -z-0 h-[600px] w-[900px] -translate-x-1/2"
-          style={{
-            background:
-              "radial-gradient(ellipse at center, rgba(37,99,235,.18), transparent 60%)",
-          }}
-        /> {/* Solo decorativo, no interactúa (pointer-events-none) */}
+          style={{ background: "radial-gradient(ellipse at center, rgba(37,99,235,.16), transparent 60%)" }}
+          aria-hidden
+        />
 
         <div className="relative z-10 mx-auto max-w-5xl px-6">
-          {/* Luna centrada arriba en el medio */}
-          <Reveal className="mx-auto mb-10 w-fit">
-            <MoonLogo size={96} glow id="hero" /> {/* Logo grande con efecto glow */}
+          <Reveal className="mx-auto mb-9 w-fit">
+            <MoonLogo size={88} glow id="hero" />
           </Reveal>
 
-          {/* Título principal */}
           <Reveal delay={1}>
-            <h1 className="font-serif text-[clamp(44px,8vw,92px)] font-normal leading-[1.02] tracking-[-0.025em]">
+            <h1 className="font-serif text-[clamp(42px,7.5vw,88px)] font-normal leading-[1.03] tracking-[-0.025em]">
               Aprendé a ver
               <br />
-              <em className="bg-gradient-to-r from-blue-light to-pink bg-clip-text not-italic text-transparent [font-style:italic]">
-                el brillo {/* Palabra destacada con degradé de color */}
+              <em className="bg-gradient-to-r from-blue-light to-pink bg-clip-text text-transparent">
+                el brillo
               </em>{" "}
               de la IA
             </h1>
           </Reveal>
 
-          {/* Eyebrow (etiqueta pequeña) con líneas decorativas a los costados */}
           <Reveal delay={2}>
-            <div className="mx-auto mt-9 flex w-fit items-center gap-3">
-              <span className="h-px w-10 bg-gradient-to-r from-transparent to-line-strong" /> {/* línea izquierda */}
+            <div className="mx-auto mt-8 flex w-fit items-center gap-3">
+              <span className="h-px w-10 bg-gradient-to-r from-transparent to-line-strong" aria-hidden />
               <span className="flex items-center gap-2 rounded-full border border-line bg-surface/60 px-4 py-1.5 backdrop-blur-sm">
-                <MoonLogo size={15} id="eyebrow" /> {/* logo chico */}
-                <span className="font-mono text-[12px] uppercase tracking-[0.2em] text-blue-light">
+                <MoonLogo size={14} id="eyebrow" />
+                <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-blue-light">
                   Curso de ingeniería de prompts
                 </span>
               </span>
-              <span className="h-px w-10 bg-gradient-to-l from-transparent to-line-strong" /> {/* línea derecha */}
+              <span className="h-px w-10 bg-gradient-to-l from-transparent to-line-strong" aria-hidden />
             </div>
           </Reveal>
 
-          {/* Subtítulo/descripción corta */}
           <Reveal delay={3}>
-            <p className="mx-auto mt-8 max-w-[540px] text-[19px] text-muted">
-              La inteligencia artificial no es complicada. Solo nadie te enseñó a
-              hablarle. En 20 minutos cambiamos eso.
+            <p className="mx-auto mt-7 max-w-[520px] text-lg text-muted">
+              La inteligencia artificial no es complicada. Solo nadie te enseñó
+              a hablarle. En 20 minutos cambiamos eso.
             </p>
           </Reveal>
 
-          {/* Botones de acción (CTA) */}
           <Reveal delay={4}>
-            <div className="mt-11 flex flex-wrap justify-center gap-3.5">
+            <div className="mt-10 flex flex-wrap justify-center gap-3.5">
               <Link href="/register" className="btn btn-primary">
-                Empezar gratis {/* Lleva al registro */}
+                Empezar gratis
               </Link>
-              <Link href="#como" className="btn btn-ghost">
-                Ver cómo funciona {/* Scroll a la sección "cómo funciona" */}
+              <Link href="#programa" className="btn btn-ghost">
+                Ver el programa
               </Link>
             </div>
-            <p className="mt-9 font-mono text-[12.5px] tracking-[0.04em] text-dim">
+            <p className="mt-7 font-mono text-xs tracking-[0.04em] text-dim">
               7 módulos · práctica real · certificado al terminar
             </p>
+          </Reveal>
+
+          {/* Preview del producto */}
+          <Reveal delay={4} className="mt-16">
+            <div
+              aria-hidden
+              className="relative mx-auto max-w-3xl rounded-2xl border border-line-strong bg-surface/80 text-left shadow-[0_30px_80px_-30px_rgba(37,99,235,0.25)] backdrop-blur-sm"
+            >
+              <div className="flex items-center gap-2 border-b border-line px-5 py-3.5">
+                <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+                <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+                <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+                <span className="ml-3 font-mono text-[11px] text-dim">
+                  promptify · módulo 2 — práctica
+                </span>
+              </div>
+
+              <div className="flex">
+                <div className="hidden w-44 shrink-0 border-r border-line p-4 sm:block">
+                  <p className="mb-3 font-mono text-[9px] uppercase tracking-[0.2em] text-dim">
+                    Currículum
+                  </p>
+                  <div className="space-y-1.5">
+                    {MODULES.map((m, i) => (
+                      <div
+                        key={m.slug}
+                        className={`flex items-center gap-2 rounded-md px-2 py-1.5 text-[11px] ${
+                          i === 1 ? "bg-blue-light/10 text-text" : "text-dim"
+                        }`}
+                      >
+                        <span
+                          className={`flex h-4 w-4 shrink-0 items-center justify-center rounded text-[8px] font-semibold ${
+                            i < 1
+                              ? "bg-blue-light/20 text-blue-light"
+                              : i === 1
+                              ? "bg-blue text-white"
+                              : "bg-surface-2"
+                          }`}
+                        >
+                          {i < 1 ? "✓" : i + 1}
+                        </span>
+                        <span className="truncate">{m.title}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="min-w-0 flex-1 p-5">
+                  <span className="rounded bg-blue-light/15 px-2 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-[0.15em] text-blue-light">
+                    Práctica
+                  </span>
+                  <p className="mt-3 text-sm text-text">
+                    Ordená los bloques para armar un prompt profesional.
+                  </p>
+                  <div className="mt-4 space-y-2">
+                    {[
+                      "Actuá como un asesor de emprendimientos.",
+                      "Soy diseñador gráfico con 2 años de experiencia.",
+                      "Dame 5 ideas de negocio freelance.",
+                    ].map((t, i) => (
+                      <div
+                        key={i}
+                        className="flex items-center gap-2.5 rounded-lg border border-line bg-bg-soft px-3 py-2.5"
+                      >
+                        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-blue-light/15 text-[10px] font-semibold text-blue-light">
+                          {i + 1}
+                        </span>
+                        <span className="truncate font-mono text-[11px] text-muted">{t}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-4 inline-flex rounded-lg bg-gradient-to-b from-blue-light to-blue px-4 py-2 text-[11px] font-semibold text-white">
+                    Comprobar respuesta
+                  </div>
+                </div>
+              </div>
+            </div>
           </Reveal>
         </div>
       </header>
 
-      {/* ---------- PROBLEMA ---------- */}
-      <section className="py-[120px]">
+      {/* EL MÉTODO */}
+      <section id="como" className="py-28">
         <div className="mx-auto max-w-6xl px-6">
-          {/* Encabezado de la sección */}
-          <Reveal className="mb-16 max-w-[640px]">
-            <span className="eyebrow mb-[18px] block">El problema</span>
-            <h2 className="font-serif text-[clamp(30px,5vw,52px)] font-normal leading-[1.08] tracking-[-0.02em]">
-              No es que la IA no entienda. Es como le explicas.
+          <Reveal className="mb-14 max-w-[620px]">
+            <span className="eyebrow mb-4 block">El método</span>
+            <h2 className="font-serif text-[clamp(30px,5vw,50px)] font-normal leading-[1.08] tracking-[-0.02em]">
+              Tres piezas. Un buen prompt.
             </h2>
-            <p className="mt-5 text-[18px] text-muted">
-              La misma herramienta, dos resultados opuestos. La diferencia nunca
-              fue técnica: fue saber comunicar lo que querés.
+            <p className="mt-5 text-lg text-muted">
+              Todo prompt efectivo se construye igual. Mirá cómo se ensamblan
+              las piezas — cada color es una parte del mensaje.
             </p>
           </Reveal>
 
-          {/* Comparación: prompt malo vs prompt bueno */}
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <Reveal delay={1}>
-              {/* Tarjeta: ejemplo de prompt vago (mal ejemplo) */}
-              <div className="rounded-[18px] border border-line bg-surface p-[34px] transition-transform duration-500 hover:-translate-y-1">
-                <span className="mb-5 inline-block rounded-[7px] bg-red-400/10 px-[11px] py-[5px] font-mono text-[11px] uppercase tracking-[0.15em] text-red-300">
-                  Prompt vago
-                </span>
-                <p className="font-mono text-[14.5px] leading-[1.7]">
-                  &quot;Dame ideas de negocio&quot;
-                </p>
-                <p className="mt-[18px] text-sm text-muted">
-                  Respuesta genérica, sirve para cualquiera y para nadie.
-                </p>
-              </div>
-            </Reveal>
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+            {PIECES.map((p, i) => (
+              <Reveal key={p.label} delay={(i + 1) as 1 | 2 | 3}>
+                <div
+                  className={`h-full rounded-2xl border ${p.border} bg-surface p-7 transition-transform duration-500 hover:-translate-y-1`}
+                >
+                  <span
+                    className={`inline-block rounded-md ${p.chip} px-2.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.15em] ${p.color}`}
+                  >
+                    {p.label}
+                  </span>
+                  <p className={`mt-5 font-mono text-[13.5px] leading-relaxed ${p.color}`}>
+                    &quot;{p.fragment}&quot;
+                  </p>
+                  <p className="mt-4 text-sm leading-relaxed text-muted">{p.detail}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
 
-            <Reveal delay={2}>
-              {/* Tarjeta: ejemplo de prompt con estructura (buen ejemplo) */}
-              <div className="rounded-[18px] border border-blue-light/25 bg-surface p-[34px] transition-transform duration-500 hover:-translate-y-1">
-                <span className="mb-5 inline-block rounded-[7px] bg-blue-light/12 px-[11px] py-[5px] font-mono text-[11px] uppercase tracking-[0.15em] text-blue-light">
-                  Prompt con estructura
+          {/* Prompt ensamblado */}
+          <Reveal delay={4} className="mt-5">
+            <div className="rounded-2xl border border-line bg-bg-soft p-7 md:p-8">
+              <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.22em] text-dim">
+                El prompt completo
+              </p>
+              <p className="font-mono text-[15px] leading-[1.9]">
+                <span className="text-blue-light">
+                  Soy diseñador gráfico con 2 años de experiencia en Argentina.
+                </span>{" "}
+                <span className="text-text">
+                  Dame 5 ideas de negocio freelance con baja inversión.
+                </span>{" "}
+                <span className="text-pink">
+                  Presentalas en una lista numerada, cada una con su justificación.
                 </span>
-                <p className="font-mono text-[14.5px] leading-[1.7]">
-                  &quot;Soy diseñador gráfico con 2 años de experiencia en
-                  Argentina. Dame 5 ideas de negocio freelance con baja
-                  inversión.&quot;
-                </p>
-                <p className="mt-[18px] text-sm text-muted">
-                  Contexto, rol y formato. La respuesta ahora es tuya.
-                </p>
+              </p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* EL PROGRAMA */}
+      <section id="programa" className="border-t border-line py-28">
+        <div className="mx-auto max-w-6xl px-6">
+          <Reveal className="mb-14 flex flex-wrap items-end justify-between gap-6">
+            <div className="max-w-[560px]">
+              <span className="eyebrow mb-4 block">El programa</span>
+              <h2 className="font-serif text-[clamp(30px,5vw,50px)] font-normal leading-[1.08] tracking-[-0.02em]">
+                7 módulos, 20 minutos
+              </h2>
+            </div>
+            <p className="max-w-[340px] text-sm leading-relaxed text-muted">
+              Cada módulo cierra con una práctica. Tu progreso se guarda y el
+              certificado se desbloquea al terminar.
+            </p>
+          </Reveal>
+
+          <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-2">
+            {MODULES.map((m, i) => (
+              <Reveal key={m.slug} delay={Math.min(i % 2 === 0 ? 1 : 2, 4) as 1 | 2}>
+                <div className="group flex h-full gap-5 bg-surface p-7 transition-colors duration-300 hover:bg-surface-2">
+                  <span className="font-serif text-[15px] leading-7 text-blue-light">
+                    {String(m.index).padStart(2, "0")}
+                  </span>
+                  <div className="min-w-0">
+                    <h3 className="font-serif text-lg font-medium tracking-[-0.01em] text-text">
+                      {m.title}
+                    </h3>
+                    <p className="mt-1.5 text-sm leading-relaxed text-muted">{m.subtitle}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+            <Reveal delay={2}>
+              <div className="flex h-full items-center gap-5 bg-gradient-to-br from-surface to-blue/10 p-7">
+                <MoonLogo size={34} id="programa-cert" />
+                <div>
+                  <h3 className="font-serif text-lg font-medium tracking-[-0.01em] text-text">
+                    Tu certificado
+                  </h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-muted">
+                    Personalizado con tu nombre, descargable en PDF al completar el curso.
+                  </p>
+                </div>
               </div>
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* ---------- CÓMO FUNCIONA ---------- */}
-      <section id="como" className="py-[120px]">
-        <div className="mx-auto max-w-6xl px-6">
-          <Reveal className="mb-16 max-w-[640px]">
-            <span className="eyebrow mb-[18px] block">Cómo funciona</span>
-            <h2 className="font-serif text-[clamp(30px,5vw,52px)] font-normal leading-[1.08] tracking-[-0.02em]">
-              Tres piezas. Un buen prompt.
+      {/* FAQ */}
+      <section className="border-t border-line py-28">
+        <div className="mx-auto max-w-3xl px-6">
+          <Reveal className="mb-12 text-center">
+            <span className="eyebrow mb-4 block">Preguntas frecuentes</span>
+            <h2 className="font-serif text-[clamp(28px,4.5vw,44px)] font-normal tracking-[-0.02em]">
+              Lo que siempre preguntan
             </h2>
           </Reveal>
 
-          {/* Los 3 pasos/pilares se guardan en un array y se recorren con map */}
-          <div className="grid grid-cols-1 overflow-hidden rounded-[18px] border border-line md:grid-cols-3">
-            {[
-              { n: "01", t: "Contexto", d: "Quién sos, para qué público, qué situación rodea la tarea. Lo que la IA no puede adivinar." },
-              { n: "02", t: "Instrucción", d: "Una tarea clara y directa. Cuánto querés, con qué nivel de detalle, hacia dónde apunta." },
-              { n: "03", t: "Formato", d: "Cómo querés la respuesta: una lista, una tabla, un tono. La forma también comunica." },
-            ].map((s, i) => (
-              <Reveal key={s.n} delay={(i + 1) as 1 | 2 | 3}> {/* Animación escalonada por columna */}
-                <div className="h-full border-line bg-surface p-[40px_34px] transition-colors duration-500 hover:bg-surface-2 md:border-r [&:last-child]:md:border-r-0">
-                  <span className="mb-[22px] block font-serif text-[15px] text-blue-light">
-                    {s.n} {/* Número del paso */}
-                  </span>
-                  <h3 className="mb-3 font-serif text-[23px] font-medium tracking-[-0.01em]">
-                    {s.t} {/* Título del paso */}
-                  </h3>
-                  <p className="text-[15px] text-muted">{s.d}</p> {/* Descripción */}
-                </div>
+          <div className="space-y-3">
+            {FAQS.map((f, i) => (
+              <Reveal key={f.q} delay={Math.min(i + 1, 4) as 1 | 2 | 3 | 4}>
+                <details className="group rounded-xl border border-line bg-surface transition-colors open:border-blue-light/30">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 font-medium text-text [&::-webkit-details-marker]:hidden">
+                    {f.q}
+                    <span
+                      className="shrink-0 text-dim transition-transform duration-300 group-open:rotate-45"
+                      aria-hidden
+                    >
+                      +
+                    </span>
+                  </summary>
+                  <p className="px-6 pb-5 text-sm leading-relaxed text-muted">{f.a}</p>
+                </details>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ---------- CTA FINAL ---------- */}
-      <section className="py-[140px] text-center">
+      {/* CTA FINAL */}
+      <section className="border-t border-line py-32 text-center">
         <div className="mx-auto max-w-6xl px-6">
-          <Reveal className="mx-auto mb-9 w-fit">
-            <MoonLogo size={64} glow id="final" /> {/* Logo final, más chico que el del hero */}
+          <Reveal className="mx-auto mb-8 w-fit">
+            <MoonLogo size={60} glow id="final" />
           </Reveal>
           <Reveal delay={1}>
-            <h2 className="mb-[22px] font-serif text-[clamp(30px,5vw,52px)] font-normal tracking-[-0.02em]">
+            <h2 className="mb-5 font-serif text-[clamp(30px,5vw,50px)] font-normal tracking-[-0.02em]">
               Empezá a ver el brillo
             </h2>
-            <p className="mx-auto mb-[38px] max-w-[440px] text-[18px] text-muted">
-              Gratis, sin vueltas. Creá tu cuenta y en veinte minutos vas a mirar
-              la IA distinto.
+            <p className="mx-auto mb-9 max-w-[420px] text-lg text-muted">
+              Gratis, sin vueltas. Creá tu cuenta y en veinte minutos vas a
+              mirar la IA distinto.
             </p>
-            <Link href="/register" className="btn btn-primary">
-              Comenzar ahora {/* Segundo CTA al registro, al final de la página */}
+            <Link href="/register" className="btn btn-primary !px-8 !py-3.5">
+              Comenzar ahora
             </Link>
           </Reveal>
         </div>
       </section>
 
-      {/* ---------- FOOTER ---------- */}
+      {/* FOOTER */}
       <footer className="border-t border-line py-10">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-5 px-6">
-          <Wordmark size={17} /> {/* Logo/texto de marca */}
-          <span className="text-[13.5px] text-dim">
-            © {new Date().getFullYear()} · Hecho por Facundo Gutiérrez y Lucio Roa {/* Año actual dinámico + créditos */}
+          <Wordmark size={17} />
+          <nav className="flex gap-6 text-sm text-muted" aria-label="Enlaces del pie">
+            <Link href="/login" className="transition-colors hover:text-text">Ingresar</Link>
+            <Link href="/register" className="transition-colors hover:text-text">Crear cuenta</Link>
+            <Link href="#programa" className="transition-colors hover:text-text">Programa</Link>
+          </nav>
+          <span className="text-[13px] text-dim">
+            © {new Date().getFullYear()} · Hecho por Facundo Gutiérrez y Lucio Roa
           </span>
         </div>
       </footer>
