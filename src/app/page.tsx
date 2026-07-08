@@ -371,9 +371,6 @@ export default function Home() {
       {/* CTA FINAL */}
       <section className="border-t border-line py-32 text-center">
         <div className="mx-auto max-w-6xl px-6">
-          <Reveal className="mx-auto mb-8 w-fit">
-            <MoonLogo size={60} glow id="final" />
-          </Reveal>
           <Reveal delay={1}>
             <h2 className="mb-5 font-serif text-[clamp(30px,5vw,50px)] font-normal tracking-[-0.02em]">
               Empezá a ver el brillo
