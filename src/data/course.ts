@@ -63,7 +63,19 @@ export const MODULES: Module[] = [
       {
         heading: "El problema no es técnico, es comunicacional",
         body: "Mucha gente cree que la IA no sirve cuando en realidad el problema es cómo se le habla. Preguntas poco claras generan respuestas poco útiles y frustración. Aprender a promptear bien es aprender a comunicar tu intención con precisión.",
-      },
+      },3. Implementación y Configuración de Herramientas
+Integrar las capacidades de IA mencionadas en tus recursos tecnológicos:
+
+Configuración de Superagents: Utilizar Base44 para crear agentes que asistan a los alumnos durante los ejercicios.
+Testing Agent: Ejecutar pruebas automáticas de flujo de usuario para identificar errores en la experiencia antes de la defensa.
+Escaneo de Seguridad: Verificar que la gestión de datos y accesos sea correcta.
+4. Preparación para la Defensa
+La defensa requiere una validación sólida de lo construido:
+
+Validación de UX: Realizar pruebas de usabilidad con el prototipo de alta fidelidad.
+Documentación técnica: Actualizar el anteproyecto con los cambios realizados durante este sprint.
+Presentación de resultados: Preparar una demostración en vivo (o grabada) de cómo funcionan los ejercicios interactivos dentro de los bloques pedagógicos.
+
       {
         heading: "Qué es la ingeniería de prompts",
         body: "Es el proceso de diseñar y optimizar las instrucciones que le das a un modelo. No necesitás saber programar: necesitás claridad, lógica y un poco de práctica.",
