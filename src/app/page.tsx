@@ -65,18 +65,58 @@ export default function Home() {
 
         <div className="relative z-10 mx-auto max-w-5xl px-6">
           <Reveal className="mx-auto mb-9 w-fit">
-            <MoonLogo size={88} glow id="hero" />
+            {/* Luna azul, solo acá en el hero (el resto del sitio sigue con MoonLogo dorada) */}
+            <span className="relative inline-block" style={{ width: 88, height: 88 }}>
+              <span
+                className="absolute animate-breathe rounded-full"
+                style={{
+                  inset: "-40%",
+                  background: "radial-gradient(circle, rgba(37,99,235,.5), transparent 65%)",
+                  filter: "blur(30px)",
+                  zIndex: -1,
+                }}
+              />
+              <svg width={88} height={88} viewBox="0 0 100 100" fill="none">
+                <defs>
+                  <radialGradient id="hero-blue-moon" cx="38%" cy="32%" r="75%">
+                    <stop offset="0%" stopColor="#93C5FD" />
+                    <stop offset="55%" stopColor="#60A5FA" />
+                    <stop offset="100%" stopColor="#2563EB" />
+                  </radialGradient>
+                </defs>
+                <circle cx="50" cy="50" r="40" fill="url(#hero-blue-moon)" />
+                <circle cx="38" cy="36" r="7" fill="#1E40AF" opacity="0.3" />
+                <circle cx="62" cy="55" r="5" fill="#1E40AF" opacity="0.25" />
+                <circle cx="46" cy="66" r="4" fill="#1E40AF" opacity="0.2" />
+              </svg>
+            </span>
           </Reveal>
 
           <Reveal delay={1}>
             <h1 className="font-serif text-[clamp(42px,7.5vw,88px)] font-normal leading-[1.03] tracking-[-0.025em]">
-              Aprendé a ver
-              <br />
-              <em className="bg-gradient-to-r from-blue-light to-pink bg-clip-text text-transparent">
-                el brillo
-              </em>{" "}
-              de la IA
+              Promptify
             </h1>
+          </Reveal>
+
+          <Reveal delay={3}>
+            <p className="mx-auto mt-7 max-w-[520px] text-lg text-muted">
+              La IA no es complicada: nadie te enseñó a hablarle.
+              Eso cambia hoy, en 20 minutos.
+            </p>
+          </Reveal>
+
+          <Reveal delay={4}>
+            <div className="mt-10 flex flex-wrap justify-center gap-3.5">
+              <Link href="/register" className="btn btn-primary">
+                Empezar gratis
+              </Link>
+              <Link href="#programa" className="btn btn-ghost">
+                Ver el programa
+              </Link>
+            </div>
+            <p className="mt-7 font-mono text-xs tracking-[0.04em] text-dim">
+              7 módulos · práctica real · certificado al terminar
+            </p>
           </Reveal>
 
           <Reveal delay={2}>
