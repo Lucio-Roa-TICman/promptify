@@ -1,3 +1,6 @@
+Hay que hacer que cuanto termines un ejercicio de un modulo puedas pasar al siguiente, ahora no importa que lo termines, el boton de continuar no se activa
+
+
 # Promptify — Front
 
 Front completo del curso Promptify, hecho con **Next.js (App Router)**,
