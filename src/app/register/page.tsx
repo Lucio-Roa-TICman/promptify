@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { AuthShell } from "@/components/AuthShell";
+import { PasswordInput } from "@/components/PasswordInput";
 import { authClient } from "@/lib/auth-client";
 
 export default function RegisterPage() {
@@ -88,11 +89,9 @@ export default function RegisterPage() {
         </div>
         <div>
           <label className="mb-1.5 block text-xs font-medium text-muted">Contraseña</label>
-          <input
-            type="password"
+          <PasswordInput
             required
             minLength={8}
-            className="input-field"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Mínimo 8 caracteres"

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { AuthShell } from "@/components/AuthShell";
+import { PasswordInput } from "@/components/PasswordInput";
 import { authClient } from "@/lib/auth-client";
 
 export default function LoginPage() {
@@ -66,10 +67,8 @@ export default function LoginPage() {
         </div>
         <div>
           <label className="mb-1.5 block text-xs font-medium text-muted">Contraseña</label>
-          <input
-            type="password"
+          <PasswordInput
             required
-            className="input-field"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="••••••••"

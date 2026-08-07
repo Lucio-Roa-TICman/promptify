@@ -4,6 +4,16 @@ import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { MoonLogo } from "./MoonLogo";
 
+// Resumen corto de las competencias que otorga el curso.
+// Basado en los módulos reales de src/data/course.ts.
+const SKILLS = [
+  "Método CLARA",
+  "Contexto y Rol",
+  "Chain of Thought",
+  "Prompt Chaining",
+  "Iteración de Prompts",
+];
+
 export function Certificate({ defaultName }: { defaultName: string }) {
   const router = useRouter();
   const [name, setName] = useState(defaultName);
@@ -86,6 +96,17 @@ export function Certificate({ defaultName }: { defaultName: string }) {
               <span className="text-text">Promptify — Aprendé a promptear</span>, dominando la
               construcción de prompts efectivos para inteligencia artificial.
             </p>
+
+            <div className="mt-5 flex max-w-lg flex-wrap items-center justify-center gap-2">
+              {SKILLS.map((skill) => (
+                <span
+                  key={skill}
+                  className="rounded-full border border-line-strong bg-white/[0.03] px-3 py-1 font-mono text-[9px] uppercase tracking-wider text-blue-light"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
           </div>
 
           <div className="flex w-full items-end justify-between">
