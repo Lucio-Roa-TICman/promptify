@@ -16,7 +16,7 @@ const SKILLS = [
 
 export function Certificate({ defaultName }: { defaultName: string }) {
   const router = useRouter();
-  const [name, setName] = useState(defaultName);
+  const name = defaultName;
   const [downloading, setDownloading] = useState(false);
   const certRef = useRef<HTMLDivElement>(null);
 
@@ -50,9 +50,10 @@ export function Certificate({ defaultName }: { defaultName: string }) {
   return (
     <div className="space-y-8">
       <div className="print:hidden">
-        <label className="mb-1.5 block text-xs font-medium text-muted">Nombre en el certificado</label>
-        <div className="flex flex-col gap-3 sm:flex-row">
-          <input value={name} onChange={(e) => setName(e.target.value)} className="input-field sm:max-w-sm" placeholder="Tu nombre" />
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm text-muted">
+            Tu certificado a nombre de <span className="text-text">{name}</span>.
+          </p>
           <div className="flex gap-3">
             <button onClick={downloadPDF} disabled={downloading} className="btn btn-primary !py-2.5 text-xs">
               {downloading ? "Generando…" : "Descargar PDF"}
@@ -60,9 +61,6 @@ export function Certificate({ defaultName }: { defaultName: string }) {
             <button onClick={() => window.print()} className="btn btn-ghost !py-2.5 text-xs">Imprimir</button>
           </div>
         </div>
-        <p className="mt-2 text-xs text-dim">
-          Podés editar el nombre antes de descargar. Por defecto es el que usaste al registrarte.
-        </p>
       </div>
 
       {/* Certificado */}

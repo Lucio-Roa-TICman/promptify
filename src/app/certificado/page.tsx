@@ -43,7 +43,7 @@ export default function CertificadoPage() {
               <span className="eyebrow">Felicitaciones</span>
               <h1 className="mt-3 font-serif text-[clamp(30px,5vw,46px)] font-normal">Completaste el curso</h1>
               <p className="mt-2 text-muted">
-                Acá está tu certificado. Para descargarlo y hacerlo realmente personalizado, agrega tu nombre.
+                Acá está tu certificado, ya con tu nombre. Podés descargarlo en PDF o imprimirlo.
               </p>
             </Reveal>
             <Certificate defaultName={user.name} />
