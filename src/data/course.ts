@@ -102,7 +102,7 @@ export const MODULES: Module[] = [
       badPrompt: "Hablame de historia.",
       criteria: [
         "Especifica sobre qué tema o período histórico",
-        "Indica para quién es la respuesta (público objetivo)",
+        "Indica para quién es la respuesta",
         "Define el formato de salida",
       ],
       successMessage:
@@ -237,7 +237,7 @@ export const MODULES: Module[] = [
         "Creá un prompt para explicar qué son los agujeros negros, con estas restricciones: menos de 80 palabras, para adolescentes, sin lenguaje técnico.",
       placeholder: "Escribí acá tu prompt con las restricciones incluidas…",
       criteria: [
-        "Menciona el límite de palabras (80 o menos)",
+        "Menciona el límite de palabras",
         "Indica que es para adolescentes",
         "Pide que se evite el lenguaje técnico",
       ],
@@ -267,10 +267,10 @@ export const MODULES: Module[] = [
         "Este prompt combina varios componentes: «Actuá como profesor de historia. Explicá la Revolución Francesa para un estudiante de 14 años usando ejemplos simples y una lista final de causas y consecuencias.» Identificá cuál es el rol, la instrucción, el contexto y el indicador de salida.",
       placeholder: "Rol: … Instrucción: … Contexto: … Indicador de salida: …",
       criteria: [
-        "Identifica el rol (profesor de historia)",
-        "Identifica la instrucción (explicar la Revolución Francesa)",
-        "Identifica el contexto (estudiante de 14 años)",
-        "Identifica el indicador de salida (ejemplos simples y lista final)",
+        "Identifica el rol",
+        "Identifica la instrucción",
+        "Identifica el contexto",
+        "Identifica el indicador de salida",
       ],
       successMessage:
         "¡Exacto! Reconocer cada pieza por separado te ayuda a construir tus propios prompts desde cero.",
@@ -405,8 +405,8 @@ export const MODULES: Module[] = [
       badPrompt: "Creá una rutina de entrenamiento.",
       criteria: [
         "Indica la cantidad de días de entrenamiento",
-        "Define el nivel de la persona (por ejemplo, principiante)",
-        "Menciona el objetivo (por ejemplo, ganar masa muscular)",
+        "Define el nivel de la persona",
+        "Menciona el objetivo",
         "Pide series y repeticiones para cada ejercicio",
       ],
       successMessage:

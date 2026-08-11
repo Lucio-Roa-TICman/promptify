@@ -1,21 +1,65 @@
 "use client";
 
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import type { Exercise } from "@/data/course";
 
 /* ---------- Ordenar bloques ---------- */
+// Animación tipo FLIP: antes de reordenar, guardamos la posición actual de
+// cada bloque; después del re-render, si un bloque cambió de lugar, lo
+// "arrancamos" desde su posición vieja y lo dejamos deslizar con una
+// transición CSS hasta su posición nueva. Así el reordenamiento se ve como
+// un movimiento fluido en vez de un salto brusco.
 function OrderExercise({ ex, onSolved }: { ex: Extract<Exercise, { type: "order" }>; onSolved: () => void }) {
   const [order, setOrder] = useState<string[]>([...ex.blocks].sort(() => Math.random() - 0.5).map((b) => b.id));
   const [result, setResult] = useState<"idle" | "ok" | "fail">("idle");
+  const [justMoved, setJustMoved] = useState<Set<string>>(new Set());
+  const itemRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const prevRects = useRef<Record<string, DOMRect>>({});
+
+  function captureRects() {
+    const rects: Record<string, DOMRect> = {};
+    for (const id of order) {
+      const el = itemRefs.current[id];
+      if (el) rects[id] = el.getBoundingClientRect();
+    }
+    prevRects.current = rects;
+  }
 
   function move(i: number, dir: -1 | 1) {
     const j = i + dir;
     if (j < 0 || j >= order.length) return;
+    captureRects();
     const next = [...order];
     [next[i], next[j]] = [next[j], next[i]];
     setOrder(next);
     setResult("idle");
+    const moved = new Set([next[i], next[j]]);
+    setJustMoved(moved);
+    window.setTimeout(() => setJustMoved(new Set()), 320);
   }
+
+  useLayoutEffect(() => {
+    for (const id of order) {
+      const el = itemRefs.current[id];
+      const prev = prevRects.current[id];
+      if (!el || !prev) continue;
+      const next = el.getBoundingClientRect();
+      const deltaY = prev.top - next.top;
+      if (Math.abs(deltaY) > 0.5) {
+        el.style.transition = "none";
+        el.style.transform = `translateY(${deltaY}px)`;
+        // Forzamos reflow para que el navegador registre el estado inicial
+        // antes de animar hacia la posición final.
+        void el.offsetHeight;
+        requestAnimationFrame(() => {
+          el.style.transition = "transform 300ms cubic-bezier(0.22, 1, 0.36, 1)";
+          el.style.transform = "";
+        });
+      }
+    }
+    prevRects.current = {};
+  }, [order]);
+
   function check() {
     const ok = order.every((id, i) => id === ex.correctOrder[i]);
     setResult(ok ? "ok" : "fail");
@@ -26,14 +70,30 @@ function OrderExercise({ ex, onSolved }: { ex: Extract<Exercise, { type: "order"
   return (
     <div className="space-y-3">
       {order.map((id, i) => (
-        <div key={id} className="flex items-center gap-3 rounded-lg border border-line bg-bg-soft p-3">
-          <span className="flex h-7 w-7 items-center justify-center rounded-md bg-blue-light/15 text-xs font-semibold text-blue-light">
+        <div
+          key={id}
+          ref={(el) => { itemRefs.current[id] = el; }}
+          className={`flex items-center gap-3 rounded-lg border p-3 transition-colors duration-300 will-change-transform ${
+            justMoved.has(id) ? "border-blue-light/50 bg-blue-light/[0.08]" : "border-line bg-bg-soft"
+          }`}
+        >
+          <span className="flex h-7 w-7 items-center justify-center rounded-md bg-blue-light/15 text-xs font-semibold text-blue-light transition-transform duration-300">
             {i + 1}
           </span>
           <p className="flex-1 text-sm">{text(id)}</p>
           <div className="flex flex-col gap-1">
-            <button onClick={() => move(i, -1)} className="rounded border border-line px-2 text-muted hover:text-text">↑</button>
-            <button onClick={() => move(i, 1)} className="rounded border border-line px-2 text-muted hover:text-text">↓</button>
+            <button
+              onClick={() => move(i, -1)}
+              className="rounded border border-line px-2 text-muted transition-all duration-150 hover:border-blue-light/40 hover:text-text active:scale-90"
+            >
+              ↑
+            </button>
+            <button
+              onClick={() => move(i, 1)}
+              className="rounded border border-line px-2 text-muted transition-all duration-150 hover:border-blue-light/40 hover:text-text active:scale-90"
+            >
+              ↓
+            </button>
           </div>
         </div>
       ))}

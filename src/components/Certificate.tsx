@@ -7,17 +7,17 @@ import { MoonLogo } from "./MoonLogo";
 // Resumen corto de las competencias que otorga el curso.
 // Basado en los módulos reales de src/data/course.ts.
 const SKILLS = [
-  "Método CLARA",
-  "Contexto y Rol",
-  "Chain of Thought",
-  "Prompt Chaining",
-  "Iteración de Prompts",
+  "Construcción de prompts efectivos",
+  "Aplicación de técnicas de prompting",
+  "Ejercitación práctica e interactiva",
+  "Mejora iterativa de resultados",
 ];
 
 export function Certificate({ defaultName }: { defaultName: string }) {
   const router = useRouter();
   const name = defaultName;
   const [downloading, setDownloading] = useState(false);
+  const [downloadError, setDownloadError] = useState(false);
   const certRef = useRef<HTMLDivElement>(null);
 
   const dateLabel = new Date().toLocaleDateString("es-AR", {
@@ -28,20 +28,35 @@ export function Certificate({ defaultName }: { defaultName: string }) {
 
   async function downloadPDF() {
     setDownloading(true);
+    setDownloadError(false);
     try {
-      // Carga jsPDF y html2canvas desde CDN (sin dependencias en package.json).
-      const [{ jsPDF }, html2canvas] = await Promise.all([
-        loadJsPDF(),
-        loadHtml2Canvas(),
+      // jsPDF y html2canvas ahora son dependencias reales del proyecto
+      // (ver package.json), en vez de cargarse desde un <script> de CDN.
+      // Antes, si el CDN fallaba (bloqueado por un adblocker, firewall
+      // corporativo, o simplemente sin conexión al momento del click),
+      // el catch caía silenciosamente en window.print(), que es lo que
+      // hacía que "Descargar PDF" en realidad abriera el diálogo de
+      // impresión. Con las librerías empaquetadas en el propio build,
+      // esa falla deja de depender de un recurso externo.
+      const [{ default: html2canvas }, { jsPDF }] = await Promise.all([
+        import("html2canvas"),
+        import("jspdf"),
       ]);
-      if (!certRef.current) return;
-      const canvas = await html2canvas(certRef.current, { scale: 2, backgroundColor: "#0A0B0F" });
+      if (!certRef.current) throw new Error("No se encontró el certificado en pantalla.");
+      const canvas = await html2canvas(certRef.current, {
+        scale: 2,
+        backgroundColor: "#0A0B0F",
+        useCORS: true,
+      });
       const img = canvas.toDataURL("image/png");
       const pdf = new jsPDF({ orientation: "landscape", unit: "px", format: [canvas.width, canvas.height] });
       pdf.addImage(img, "PNG", 0, 0, canvas.width, canvas.height);
       pdf.save(`certificado-promptify-${name.replace(/\s+/g, "-").toLowerCase()}.pdf`);
-    } catch {
-      window.print();
+    } catch (err) {
+      // Si falla de verdad, avisamos en la UI en vez de mandar a imprimir
+      // sin que el usuario entienda por qué cambió de acción.
+      console.error("No se pudo generar el PDF del certificado:", err);
+      setDownloadError(true);
     } finally {
       setDownloading(false);
     }
@@ -61,6 +76,12 @@ export function Certificate({ defaultName }: { defaultName: string }) {
             <button onClick={() => window.print()} className="btn btn-ghost !py-2.5 text-xs">Imprimir</button>
           </div>
         </div>
+        {downloadError && (
+          <p className="mt-3 text-xs text-amber-300">
+            No pudimos generar el archivo PDF automáticamente. Probá de nuevo, o usá el botón
+            &quot;Imprimir&quot; y elegí &quot;Guardar como PDF&quot; en el diálogo de impresión.
+          </p>
+        )}
       </div>
 
       {/* Certificado */}
@@ -127,24 +148,3 @@ export function Certificate({ defaultName }: { defaultName: string }) {
   );
 }
 
-/* Cargadores de CDN (evitan sumar dependencias al package.json del front) */
-function loadScript(src: string): Promise<void> {
-  return new Promise((resolve, reject) => {
-    if (document.querySelector(`script[src="${src}"]`)) return resolve();
-    const s = document.createElement("script");
-    s.src = src;
-    s.onload = () => resolve();
-    s.onerror = reject;
-    document.head.appendChild(s);
-  });
-}
-async function loadJsPDF() {
-  await loadScript("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js");
-  // @ts-expect-error global de la CDN
-  return { jsPDF: window.jspdf.jsPDF };
-}
-async function loadHtml2Canvas() {
-  await loadScript("https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js");
-  // @ts-expect-error global de la CDN
-  return window.html2canvas;
-}
