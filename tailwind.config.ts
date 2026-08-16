@@ -16,11 +16,25 @@ const config: Config = {
         dim: "#565c6b",
         line: "rgba(255,255,255,0.07)",
         "line-strong": "rgba(255,255,255,0.13)",
+
+        // Paleta "kiddo" — solo para la landing (fase 1: cálida/tierra,
+        // el azul queda como acento puntual, no como fondo de sección)
+        cream: "#F2EFE4",
+        sand: "#EAE0CC",
+        paper: "#FFFFFF",
+        ink: "#201A14",
+        clay: "#B5622E",
+        kiddo: {
+          orange: "#FF7A0D",
+          "orange-dark": "#E36700",
+          blue: "#045699",
+        },
       },
       fontFamily: {
         serif: ["var(--font-serif)", "Georgia", "serif"],
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "monospace"],
+        display: ["var(--font-display)", "system-ui", "sans-serif"],
       },
       keyframes: {
         breathe: {
