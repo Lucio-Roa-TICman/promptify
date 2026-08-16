@@ -5,7 +5,6 @@ import { IntroVisual } from "@/components/sections/IntroVisual";
 import { CharacterShowcase } from "@/components/sections/CharacterShowcase";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { EducationalVisual } from "@/components/sections/EducationalVisual";
-import { ToolsEcosystem } from "@/components/sections/ToolsEcosystem";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 
 export default function Home() {
@@ -17,7 +16,6 @@ export default function Home() {
       <CharacterShowcase />
       <HowItWorks />
       <EducationalVisual />
-      <ToolsEcosystem />
       <FinalCTA />
       <LandingFooter />
     </div>

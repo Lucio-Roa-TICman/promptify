@@ -1,6 +1,5 @@
 import { Reveal } from "@/components/Reveal";
 import { Button } from "@/components/ui/Button";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { ModelChip } from "@/components/hero/ModelChip";
 import { ChatGPTMark, ClaudeMark, GeminiMark } from "@/components/icons/AiMarks";
 import { Cerebrito } from "@/components/mascots/Cerebrito";
@@ -9,16 +8,14 @@ import { Cerebrito } from "@/components/mascots/Cerebrito";
  * Entrada de la landing. Los tres ecosistemas de IA son protagonistas
  * visuales desde el primer segundo — no hay hero SaaS tradicional con
  * párrafo largo, y la luna de marca no aparece acá (queda solo en el nav).
+ * Sin eyebrow: los chips de modelo ya cumplen ese rol, una etiqueta extra
+ * era chrome de más antes de llegar al título.
  */
 export function Hero() {
   return (
-    <header className="relative overflow-hidden pt-[140px] pb-16 text-center">
+    <header className="relative overflow-hidden pt-[150px] pb-16 text-center">
       <div className="relative z-10 mx-auto max-w-4xl px-6">
-        <Reveal>
-          <Eyebrow>Curso de IA</Eyebrow>
-        </Reveal>
-
-        <Reveal delay={1} className="mt-8 flex flex-wrap items-center justify-center gap-3.5">
+        <Reveal className="flex flex-wrap items-center justify-center gap-3.5">
           <ModelChip icon={<ChatGPTMark size={24} />} label="ChatGPT" rotate="-3deg" />
           <ModelChip icon={<ClaudeMark size={24} />} label="Claude" rotate="2deg" />
           <ModelChip icon={<GeminiMark size={24} />} label="Gemini" rotate="-2deg" />
