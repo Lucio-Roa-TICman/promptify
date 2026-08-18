@@ -6,17 +6,24 @@ import Link from "next/link";
 import { AuthShell } from "@/components/AuthShell";
 import { PasswordInput } from "@/components/PasswordInput";
 import { authClient } from "@/lib/auth-client";
+import { Robot } from "@/components/mascots/Robot";
 
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  // better-auth devuelve el mismo código INVALID_EMAIL_OR_PASSWORD tanto si
+  // el email no existe como si la contraseña está mal (a propósito, para no
+  // revelar qué emails están registrados). Por eso este estado no dice "esa
+  // cuenta no existe" con certeza, sino un mensaje que cubre ambos casos.
+  const [accountNotFound, setAccountNotFound] = useState(false);
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+    setAccountNotFound(false);
     setLoading(true);
 
     const { error: signInError } = await authClient.signIn.email({
@@ -27,16 +34,15 @@ export default function LoginPage() {
     setLoading(false);
 
     if (signInError) {
-      setError(
-        signInError.code === "INVALID_EMAIL_OR_PASSWORD"
-          ? "Email o contraseña incorrectos."
-          : signInError.message ?? "No se pudo iniciar sesión."
-      );
+      if (signInError.code === "INVALID_EMAIL_OR_PASSWORD") {
+        setAccountNotFound(true);
+      } else {
+        setError(signInError.message ?? "No se pudo iniciar sesión.");
+      }
       return;
     }
 
     router.push("/dashboard");
-    router.refresh();
   }
 
   return (
@@ -77,7 +83,7 @@ export default function LoginPage() {
         </div>
 
         {error && (
-          <p className="rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-xs text-red-300">
+          <p className="rounded-lg border border-red-300 bg-red-50 px-3 py-2 text-xs text-red-700">
             {error}
           </p>
         )}
@@ -86,6 +92,21 @@ export default function LoginPage() {
           {loading ? "Ingresando…" : "Ingresar"}
         </button>
       </form>
+
+      {accountNotFound && (
+        <div className="mt-5 flex flex-col items-center rounded-2xl border-2 border-ink/12 bg-sand/40 px-5 py-6 text-center">
+          <div className="w-20">
+            <Robot />
+          </div>
+          <p className="mt-3 font-serif text-lg font-medium">Ups… no encontramos esa cuenta</p>
+          <p className="mt-1 text-sm text-muted">
+            Revisá tu email y contraseña, o creá una cuenta nueva para continuar.
+          </p>
+          <Link href="/register" className="btn btn-primary mt-4 !py-2.5 text-xs">
+            Crear cuenta
+          </Link>
+        </div>
+      )}
     </AuthShell>
   );
 }

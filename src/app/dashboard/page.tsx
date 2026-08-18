@@ -22,8 +22,11 @@ export default function DashboardPage() {
   }, [sessionLoading, session, router]);
 
   useEffect(() => {
-    if (session) getCompleted().then(setCompleted);
-  }, [session]);
+    // No depende de `session`: /api/progress ya resuelve el usuario por la
+    // cookie en el servidor (igual que /get-session), así que esperar a
+    // useSession() acá solo encadenaba dos pedidos que podían ir en paralelo.
+    getCompleted().then(setCompleted);
+  }, []);
 
   if (sessionLoading || !session || completed === null) {
     return <div className="min-h-screen" />;
@@ -56,7 +59,7 @@ export default function DashboardPage() {
         <div className="mt-10 grid gap-5 lg:grid-cols-3">
           {/* Tarjeta grande: anillo de progreso + botón de acción */}
           <Reveal delay={1} className="lg:col-span-2">
-            <div className="flex h-full items-center gap-6 rounded-[18px] border border-line bg-surface p-7">
+            <div className="flex h-full items-center gap-6 rounded-[18px] border-2 border-ink/15 bg-surface p-7">
               <ProgressRing value={done} max={TOTAL_MODULES} label={`${pct}%`} sublabel="Completado" />
               <div>
                 <h2 className="font-serif text-xl font-medium">Tu progreso</h2>
@@ -93,7 +96,7 @@ export default function DashboardPage() {
                 <Reveal key={m.slug} delay={Math.min(i + 1, 4) as 1 | 2 | 3 | 4}> {/* Animación escalonada, tope en 4 */}
                   <Link
                     href={`/curso?m=${m.slug}`} // Lleva al módulo correspondiente
-                    className="group flex items-center gap-4 rounded-[14px] border border-line bg-surface p-5 transition-colors hover:border-blue-light/40"
+                    className="group flex items-center gap-4 rounded-[14px] border-2 border-ink/12 bg-surface p-5 transition-colors hover:border-kiddo-orange/60"
                   >
                     <div
                       className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border text-sm font-semibold ${
