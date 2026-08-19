@@ -27,7 +27,7 @@ export function Navbar({
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-bg/70 backdrop-blur-xl">
+    <header className="sticky top-0 z-40 border-b-[3px] border-ink bg-cream">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <Link href="/dashboard">
           <Wordmark size={19} />
@@ -38,8 +38,8 @@ export function Navbar({
             <Link
               key={l.key}
               href={l.href}
-              className={`rounded-lg px-4 py-2 text-sm transition-colors ${
-                active === l.key ? "bg-white/[0.06] text-text" : "text-muted hover:text-text"
+              className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
+                active === l.key ? "bg-sand text-ink" : "text-muted hover:text-ink"
               }`}
             >
               {l.label}
@@ -53,7 +53,7 @@ export function Navbar({
           )}
           <button
             onClick={handleSignOut}
-            className="rounded-lg border border-line-strong px-3 py-1.5 text-xs text-muted transition-colors hover:border-blue-light/40 hover:text-text"
+            className="rounded-full border-2 border-ink/20 px-3 py-1.5 text-xs font-semibold text-muted transition-colors hover:border-ink hover:text-ink"
           >
             Salir
           </button>

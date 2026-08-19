@@ -21,11 +21,11 @@ export function ProgressRing({
       <svg width={size} height={size} className="-rotate-90">
         <defs>
           <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#60A5FA" />
-            <stop offset="100%" stopColor="#FBCFE8" />
+            <stop offset="0%" stopColor="#FF7A0D" />
+            <stop offset="100%" stopColor="#B5622E" />
           </linearGradient>
         </defs>
-        <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="rgba(255,255,255,0.07)" strokeWidth="7" />
+        <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="rgba(32,26,20,0.08)" strokeWidth="7" />
         <circle
           cx={size / 2}
           cy={size / 2}
@@ -37,7 +37,7 @@ export function ProgressRing({
           strokeDasharray={circ}
           strokeDashoffset={offset}
           className="transition-[stroke-dashoffset] duration-700 ease-out"
-          style={{ filter: "drop-shadow(0 0 8px rgba(96,165,250,0.5))" }}
+          style={{ filter: "drop-shadow(0 0 8px rgba(255,122,13,0.35))" }}
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">

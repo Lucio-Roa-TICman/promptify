@@ -1,6 +1,7 @@
 /**
  * Logo de la media luna de Promptify.
- * El degradé azul->rosa representa "el brillo" del concepto de marca.
+ * El degradé naranja->tierra representa "el brillo" del concepto de marca,
+ * en línea con la paleta kiddo del resto de la app (fase 2).
  */
 export function MoonLogo({
   size = 30,
@@ -22,7 +23,7 @@ export function MoonLogo({
           style={{
             inset: "-40%",
             background:
-              "radial-gradient(circle, rgba(37,99,235,.45), transparent 65%)",
+              "radial-gradient(circle, rgba(255,122,13,.45), transparent 65%)",
             filter: "blur(30px)",
             zIndex: -1,
           }}
@@ -31,9 +32,9 @@ export function MoonLogo({
       <svg width={size} height={size} viewBox="0 0 100 100" fill="none">
         <defs>
           <linearGradient id={`grad-${id}`} x1="0" y1="0" x2="100" y2="100">
-            <stop offset="0%" stopColor="#60A5FA" />
-            <stop offset="55%" stopColor="#2563EB" />
-            <stop offset="100%" stopColor="#FBCFE8" />
+            <stop offset="0%" stopColor="#FF7A0D" />
+            <stop offset="55%" stopColor="#E36700" />
+            <stop offset="100%" stopColor="#B5622E" />
           </linearGradient>
           <mask id={`mask-${id}`}>
             <rect width="100" height="100" fill="white" />

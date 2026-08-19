@@ -45,7 +45,7 @@ export function Certificate({ defaultName }: { defaultName: string }) {
       if (!certRef.current) throw new Error("No se encontró el certificado en pantalla.");
       const canvas = await html2canvas(certRef.current, {
         scale: 2,
-        backgroundColor: "#0A0B0F",
+        backgroundColor: "#FFFFFF",
         useCORS: true,
       });
       const img = canvas.toDataURL("image/png");
@@ -87,14 +87,14 @@ export function Certificate({ defaultName }: { defaultName: string }) {
       {/* Certificado */}
       <div
         ref={certRef}
-        className="relative mx-auto aspect-[1.414/1] w-full max-w-3xl overflow-hidden rounded-[20px] border border-line bg-bg p-10 md:p-14"
+        className="relative mx-auto aspect-[1.414/1] w-full max-w-3xl overflow-hidden rounded-[20px] border-2 border-ink bg-paper p-10 md:p-14"
         style={{
           backgroundImage:
-            "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(37,99,235,.18), transparent 70%), radial-gradient(ellipse 50% 40% at 90% 100%, rgba(251,207,232,.08), transparent 70%)",
+            "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(255,122,13,.14), transparent 70%), radial-gradient(ellipse 50% 40% at 90% 100%, rgba(181,98,46,.10), transparent 70%)",
         }}
       >
         <div className="pointer-events-none absolute inset-4 rounded-[14px] border border-line-strong" />
-        <div className="pointer-events-none absolute inset-5 rounded-[12px] border border-blue-light/15" />
+        <div className="pointer-events-none absolute inset-5 rounded-[12px] border border-blue-light/25" />
 
         <div className="relative flex h-full flex-col items-center justify-between text-center">
           <div className="flex flex-col items-center">
@@ -120,7 +120,7 @@ export function Certificate({ defaultName }: { defaultName: string }) {
               {SKILLS.map((skill) => (
                 <span
                   key={skill}
-                  className="rounded-full border border-line-strong bg-white/[0.03] px-3 py-1 font-mono text-[9px] uppercase tracking-wider text-blue-light"
+                  className="rounded-full border border-line-strong bg-sand/50 px-3 py-1 font-mono text-[9px] uppercase tracking-wider text-blue-light"
                 >
                   {skill}
                 </span>

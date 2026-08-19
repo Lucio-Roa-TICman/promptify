@@ -74,8 +74,8 @@ export function CourseClient() {
                   <button
                     key={m.slug}
                     onClick={() => select(m.slug)}
-                    className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm transition-colors ${
-                      isActive ? "bg-blue-light/10 text-text" : "text-muted hover:bg-white/[0.03] hover:text-text"
+                    className={`flex w-full items-center gap-3 rounded-full px-3 py-2.5 text-left text-sm transition-colors ${
+                      isActive ? "bg-sand text-text" : "text-muted hover:bg-sand/50 hover:text-text"
                     }`}
                   >
                     <span
@@ -104,7 +104,7 @@ export function CourseClient() {
 
             <div className="mt-10 space-y-6">
               {active.lessons.map((l, i) => (
-                <div key={i} className="rounded-[16px] border border-line bg-surface p-6">
+                <div key={i} className="rounded-[16px] border-2 border-ink/12 bg-surface p-6">
                   {l.heading && <h2 className="font-serif text-xl font-medium">{l.heading}</h2>}
                   <p className={`${l.heading ? "mt-2" : ""} leading-relaxed text-muted`}>{l.body}</p>
                 </div>
@@ -119,7 +119,7 @@ export function CourseClient() {
                   </span>
                   <span className="text-xs text-dim">Aplicá lo que aprendiste</span>
                 </div>
-                <div className="rounded-[16px] border border-line bg-surface p-7">
+                <div className="rounded-[16px] border-2 border-ink/12 bg-surface p-7">
                   <p className="mb-5">{active.exercise.prompt}</p>
                   <ExerciseRunner exercise={active.exercise} onSolved={() => setSolved(true)} />
                 </div>

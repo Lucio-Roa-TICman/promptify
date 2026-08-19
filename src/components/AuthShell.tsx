@@ -17,7 +17,7 @@ export function AuthShell({
       {/* glow ambiente */}
       <div
         className="pointer-events-none fixed left-1/2 top-0 -z-0 h-[500px] w-[700px] -translate-x-1/2"
-        style={{ background: "radial-gradient(ellipse at center, rgba(37,99,235,.12), transparent 60%)" }}
+        style={{ background: "radial-gradient(ellipse at center, rgba(255,122,13,.10), transparent 60%)" }}
       />
       <div className="relative z-10 w-full max-w-md">
         <div className="mb-8 flex justify-center">
@@ -25,7 +25,7 @@ export function AuthShell({
             <Wordmark size={22} />
           </Link>
         </div>
-        <div className="rounded-[18px] border border-line bg-surface/70 p-8 backdrop-blur-sm">
+        <div className="rounded-[20px] border-2 border-ink bg-paper p-8">
           <h1 className="font-serif text-[26px] font-normal tracking-[-0.01em]">{title}</h1>
           <p className="mt-1.5 text-sm text-muted">{subtitle}</p>
           <div className="mt-6">{children}</div>
