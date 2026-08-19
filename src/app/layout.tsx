@@ -25,7 +25,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,400..600&family=Manrope:wght@300..700&family=JetBrains+Mono:wght@400;500&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,400..600&family=Manrope:wght@300..700&family=Fira+Sans+Condensed:wght@700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"
           rel="stylesheet"
         />
         <style>{`
@@ -33,6 +33,7 @@ export default function RootLayout({
             --font-serif: 'Fraunces', Georgia, serif;
             --font-sans: 'Manrope', system-ui, sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
+            --font-display: 'Fira Sans Condensed', system-ui, sans-serif;
           }
         `}</style>
       </head>
