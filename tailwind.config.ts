@@ -2,23 +2,33 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+  // Etapa 1 del rediseño Kiddo x Promptify: la landing soporta un toggle
+  // claro/oscuro propio (data-theme en <html>, ver LandingNav). El resto
+  // del sitio no usa variantes dark: todavía, así que este selector queda
+  // inerte fuera de la landing.
+  darkMode: ["selector", '[data-theme="dark"]'],
   theme: {
     extend: {
       colors: {
-        bg: "#0A0B0F",
-        "bg-soft": "#0d0f15",
-        surface: "#13151C",
-        "surface-2": "#181b24",
-        blue: { DEFAULT: "#2563EB", light: "#60A5FA" },
-        pink: "#FBCFE8",
-        text: "#EDF1FA",
-        muted: "#8a90a0",
-        dim: "#565c6b",
-        line: "rgba(255,255,255,0.07)",
-        "line-strong": "rgba(255,255,255,0.13)",
+        // Fase 2: estos tokens ya no son un tema oscuro aparte — quedan
+        // repintados a los mismos valores cálidos "kiddo" de abajo, para
+        // que /login, /register, /dashboard, /curso y /certificado hereden
+        // la paleta de la landing sin tocar cada className uno por uno.
+        bg: "#F2EFE4",
+        "bg-soft": "#EAE0CC",
+        surface: "#FFFFFF",
+        "surface-2": "#EAE0CC",
+        blue: { DEFAULT: "#045699", light: "#FF7A0D" },
+        pink: "#B5622E",
+        text: "#201A14",
+        muted: "#6B6255",
+        dim: "#9C9483",
+        line: "rgba(32,26,20,0.12)",
+        "line-strong": "rgba(32,26,20,0.24)",
 
-        // Paleta "kiddo" — solo para la landing (fase 1: cálida/tierra,
-        // el azul queda como acento puntual, no como fondo de sección)
+        // Paleta "kiddo" — nace en la landing, ahora es la paleta de toda
+        // la app (cálida/tierra, el azul queda como acento puntual, no
+        // como fondo de sección)
         cream: "#F2EFE4",
         sand: "#EAE0CC",
         paper: "#FFFFFF",
@@ -41,8 +51,15 @@ const config: Config = {
           "0%,100%": { opacity: "0.55", transform: "scale(0.95)" },
           "50%": { opacity: "1", transform: "scale(1.05)" },
         },
+        bob: {
+          "0%,100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-13px)" },
+        },
       },
-      animation: { breathe: "breathe 6s ease-in-out infinite" },
+      animation: {
+        breathe: "breathe 6s ease-in-out infinite",
+        bob: "bob 9.5s ease-in-out infinite",
+      },
     },
   },
   plugins: [],
