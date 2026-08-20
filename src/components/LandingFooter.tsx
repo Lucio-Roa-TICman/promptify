@@ -1,21 +1,12 @@
-import Link from "next/link";
-import { Wordmark } from "@/components/MoonLogo";
-
 export function LandingFooter() {
   return (
-    <footer className="border-t-[3px] border-ink bg-cream py-10">
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-5 px-6">
-        <Wordmark size={17} />
-        <nav className="flex gap-6 text-sm font-semibold text-ink/60" aria-label="Enlaces del pie">
-          <Link href="/login" className="transition-colors hover:text-ink">
-            Ingresar
-          </Link>
-          <Link href="/register" className="transition-colors hover:text-ink">
-            Crear cuenta
-          </Link>
-        </nav>
-        <span className="text-[13px] text-ink/40">
-          © {new Date().getFullYear()} · Hecho por Facundo Gutiérrez
+    <footer className="border-t-2 border-ink bg-[#eae7df] dark:border-[#f2eee4]/80 dark:bg-[#1e1a13]">
+      <div className="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-5 px-[clamp(18px,4vw,46px)] py-[22px]">
+        <span className="font-outfit text-[19px] font-black uppercase tracking-[-0.02em] text-ink/60 dark:text-[#f2eee4]/60">
+          Promptify
+        </span>
+        <span className="font-outfit text-[9.5px] font-bold uppercase tracking-[0.18em] text-ink/40 dark:text-[#f2eee4]/40">
+          Curso de prompting
         </span>
       </div>
     </footer>

@@ -1,21 +1,19 @@
 import { LandingNav } from "@/components/LandingNav";
 import { LandingFooter } from "@/components/LandingFooter";
 import { Hero } from "@/components/hero/Hero";
-import { IntroVisual } from "@/components/sections/IntroVisual";
-import { CharacterShowcase } from "@/components/sections/CharacterShowcase";
-import { HowItWorks } from "@/components/sections/HowItWorks";
-import { EducationalVisual } from "@/components/sections/EducationalVisual";
+import { Marquee } from "@/components/sections/Marquee";
+import { PromptPieces } from "@/components/sections/PromptPieces";
+import { LearnByDoing } from "@/components/sections/LearnByDoing";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 
 export default function Home() {
   return (
-    <div className="min-h-screen overflow-x-hidden bg-cream text-ink">
+    <div className="min-h-screen overflow-x-hidden bg-[#f3f2f2] text-ink dark:bg-[#16130e] dark:text-[#f2eee4]">
       <LandingNav />
       <Hero />
-      <IntroVisual />
-      <CharacterShowcase />
-      <HowItWorks />
-      <EducationalVisual />
+      <Marquee />
+      <PromptPieces />
+      <LearnByDoing />
       <FinalCTA />
       <LandingFooter />
     </div>

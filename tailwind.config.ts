@@ -58,10 +58,20 @@ const config: Config = {
           "0%,100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-13px)" },
         },
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
+        caret: {
+          "0%,49%": { opacity: "1" },
+          "50%,100%": { opacity: "0" },
+        },
       },
       animation: {
         breathe: "breathe 6s ease-in-out infinite",
         bob: "bob 9.5s ease-in-out infinite",
+        marquee: "marquee 34s linear infinite",
+        caret: "caret 1.1s step-end infinite",
       },
     },
   },
