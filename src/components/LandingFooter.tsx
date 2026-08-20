@@ -15,7 +15,7 @@ export function LandingFooter() {
           </Link>
         </nav>
         <span className="text-[13px] text-ink/40">
-          © {new Date().getFullYear()} · Hecho por Facundo Gutiérrez y Lucio Roa
+          © {new Date().getFullYear()} · Hecho por Facundo Gutiérrez
         </span>
       </div>
     </footer>

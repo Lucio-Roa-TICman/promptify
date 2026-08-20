@@ -30,7 +30,7 @@ untracked. Do not add new secrets to a tracked env file.**
 ## Architecture
 
 Next.js 15 (App Router) + React 19 + TypeScript + TailwindCSS. Built by
-Facundo Gutiérrez (backend/auth) and Lucio Roa (frontend/design).
+Facundo Gutiérrez (backend/auth).
 
 **Routes**: `/` (landing), `/login`, `/register`, `/dashboard` (progress panel),
 `/curso` (module sidebar + lessons + exercises), `/certificado` (personalized,

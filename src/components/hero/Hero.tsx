@@ -3,9 +3,9 @@ import { Reveal } from "@/components/Reveal";
 import { ChatGPTMark, ClaudeMark, GeminiMark } from "@/components/icons/AiMarks";
 
 /**
- * Entrada de la landing — reconstrucción fiel de "Promptify Landing.dc.html"
- * (Claude Design, proyecto "Mascota Luna para Promptify"), la referencia
- * visual no-negociable para el rediseño. Colores, tipografía (Outfit) y
+ * Entrada de la landing — reconstrucción fiel de un mockup de referencia
+ * ("Promptify Landing"), la referencia visual no-negociable para el
+ * rediseño. Colores, tipografía (Outfit) y
  * estructura calcados del mockup; usa ChatGPTMark/ClaudeMark/GeminiMark
  * (arte propio) en vez de los isotipos oficiales que trae el mockup —
  * decisión ya tomada con el usuario, ver comentario en icons/AiMarks.tsx.

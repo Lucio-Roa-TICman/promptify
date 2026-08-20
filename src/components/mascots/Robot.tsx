@@ -1,6 +1,5 @@
 /**
- * Mascota placeholder — line-art portado del proyecto de Claude Design
- * ("Personajes IA para landing" / Character.dc.html, variante "robot"),
+ * Mascota placeholder — line-art de un mockup externo (variante "robot"),
  * recoloreado a la paleta kiddo. Reemplazar por el personaje dibujado a
  * mano (estilo pizza/hamburguesa) cuando esté listo.
  */

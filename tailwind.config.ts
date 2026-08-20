@@ -45,7 +45,7 @@ const config: Config = {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "monospace"],
         display: ["var(--font-display)", "system-ui", "sans-serif"],
-        // Fuente del mockup fiel de Claude Design — por ahora solo la usa
+        // Fuente del mockup fiel de referencia — por ahora solo la usa
         // el Hero (ver comentario en layout.tsx).
         outfit: ["var(--font-outfit)", "system-ui", "sans-serif"],
       },

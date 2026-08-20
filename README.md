@@ -80,4 +80,4 @@ Tokens de color y tipografía en `tailwind.config.ts`.
 
 ---
 
-Hecho por Facundo Gutiérrez y Lucio Roa.
+Hecho por Facundo Gutiérrez.

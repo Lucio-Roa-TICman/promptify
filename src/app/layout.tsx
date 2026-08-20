@@ -34,8 +34,8 @@ export default function RootLayout({
             --font-sans: 'Manrope', system-ui, sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
             --font-display: 'Fira Sans Condensed', system-ui, sans-serif;
-            /* Fuente del mockup "Promptify Landing.dc.html" (Claude Design,
-               sistema base Modernist). Aditiva por ahora: solo la usa el
+            /* Fuente del mockup fiel de referencia (sistema base Modernist).
+               Aditiva por ahora: solo la usa el
                Hero, ver tailwind.config.ts. */
             --font-outfit: 'Outfit', system-ui, sans-serif;
           }
