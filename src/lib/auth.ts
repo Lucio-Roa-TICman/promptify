@@ -19,6 +19,19 @@ export const auth = betterAuth({
   user: {
     additionalFields: {},
   },
+  // Sin esto, cada auth.api.getSession() (useSession en el cliente, y cada
+  // ruta de /api/progress/*) pega contra Neon para validar la sesión — en
+  // el driver HTTP serverless eso son ~200-500ms por request, y dashboard
+  // solo dispara dos o tres en el primer render. La cookie cache guarda una
+  // versión firmada (JWE) de la sesión por 5 minutos, así que sigue
+  // resolviendo del lado del server pero sin ir a la base salvo que haya
+  // vencido o el usuario haya cerrado sesión.
+  session: {
+    cookieCache: {
+      enabled: true,
+      maxAge: 5 * 60,
+    },
+  },
   baseURL: process.env.BETTER_AUTH_URL,
   secret: process.env.BETTER_AUTH_SECRET,
   plugins: [nextCookies()],

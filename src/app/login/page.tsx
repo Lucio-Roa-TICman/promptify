@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { AuthShell } from "@/components/AuthShell";
@@ -10,6 +10,14 @@ import { Robot } from "@/components/mascots/Robot";
 
 export default function LoginPage() {
   const router = useRouter();
+
+  // Sin esto, el chunk/RSC payload de /dashboard recién se pide después de
+  // que signIn responde — precargarlo desde que se monta el form lo saca
+  // del camino crítico del submit.
+  useEffect(() => {
+    router.prefetch("/dashboard");
+  }, [router]);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");

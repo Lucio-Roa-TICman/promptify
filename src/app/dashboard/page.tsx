@@ -29,7 +29,17 @@ export default function DashboardPage() {
   }, []);
 
   if (sessionLoading || !session || completed === null) {
-    return <div className="min-h-screen" />;
+    // Antes esto era un <div> vacío: durante los ~200-500ms que tarda la
+    // sesión/progreso, la pantalla se veía en blanco y parecía trabada.
+    // Un anillo de progreso "fantasma" deja claro que algo está cargando.
+    return (
+      <div className="min-h-screen">
+        <div className="mx-auto max-w-6xl px-6 py-12">
+          <div className="h-16 animate-pulse rounded-lg bg-surface-2/60" />
+          <div className="mt-10 h-28 animate-pulse rounded-[18px] bg-surface-2/60" />
+        </div>
+      </div>
+    );
   }
 
   const user = session.user;

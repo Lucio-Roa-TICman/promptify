@@ -1,19 +1,21 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
-import { ChatGPTMark, ClaudeMark, GeminiMark } from "@/components/icons/AiMarks";
 
 /**
  * Entrada de la landing — reconstrucción fiel de un mockup de referencia
  * ("Promptify Landing"), la referencia visual no-negociable para el
- * rediseño. Colores, tipografía (Outfit) y estructura calcados del mockup;
- * usa ChatGPTMark/ClaudeMark/GeminiMark (arte propio) en vez de los
- * isotipos oficiales que trae el mockup — decisión ya tomada con el
- * usuario, ver comentario en icons/AiMarks.tsx.
+ * rediseño. Colores, tipografía (Outfit) y estructura calcados del mockup.
  *
  * El acento dorado (#b68235 / #d8a960 en oscuro) es el de este mockup, no
  * el kiddo-orange (#FF7A0D) que ya usa el resto del sitio — queda local al
  * Hero por ahora, a la espera de que el usuario confirme si unificamos el
  * acento del design system entero o lo dejamos así.
+ *
+ * Cada logo tiene dos animaciones independientes: la tarjeta (bob +
+ * lift/sombra al hover, ya existía) y el glifo adentro (rotate/scale al
+ * group-hover). El glow del centro reusa `animate-breathe`, el mismo
+ * keyframe que ya usa MoonLogo, en vez de sumar uno nuevo.
  */
 export function Hero() {
   return (
@@ -27,26 +29,33 @@ export function Hero() {
         <Reveal className="relative mb-[clamp(26px,4vw,44px)] flex items-center justify-center [perspective:1600px]">
           <div className="absolute bottom-[2px] h-[34px] w-[min(600px,88%)] rounded-full bg-[radial-gradient(closest-side,rgba(32,31,29,0.07),transparent_76%)] dark:bg-[radial-gradient(closest-side,rgba(242,238,228,0.08),transparent_76%)]" />
 
-          <div className="relative z-[1] mr-[clamp(-38px,-3vw,-22px)] animate-bob [animation-delay:0s]">
+          <div className="group relative z-[1] mr-[clamp(-38px,-3vw,-22px)] animate-bob [animation-delay:0s]">
             <div className="relative aspect-square w-[clamp(92px,14.5vw,162px)] origin-center rounded-[clamp(22px,3.2vw,38px)] border-2 border-ink bg-paper shadow-[7px_7px_0_0_#201A14] [transform:rotateY(22deg)_rotate(-7deg)_scale(0.92)] transition-transform duration-[440ms] hover:[transform:rotateY(0deg)_rotate(0deg)_scale(1)] hover:shadow-[11px_11px_0_0_#b68235] dark:border-[#f2eee4]/80 dark:bg-[#201c15] dark:shadow-[7px_7px_0_0_#0b0906] dark:hover:shadow-[11px_11px_0_0_#d8a960]">
               <div className="absolute inset-[6px] grid place-items-center rounded-[clamp(17px,2.6vw,31px)] border border-ink/[0.14] dark:border-[#f2eee4]/[0.16]">
-                <GeminiMark className="h-[52%] w-[52%]" />
+                <span className="relative h-[54%] w-[54%] transition-transform duration-300 ease-out group-hover:-rotate-6 group-hover:scale-110">
+                  <Image src="/ai-logos/gemini.png" alt="Gemini" fill sizes="162px" className="object-contain" />
+                </span>
               </div>
             </div>
           </div>
 
-          <div className="relative z-[3] animate-bob [animation-delay:0.4s] [animation-duration:7.6s]">
+          <div className="group relative z-[3] animate-bob [animation-delay:0.4s] [animation-duration:7.6s]">
+            <div className="pointer-events-none absolute -inset-8 -z-10 animate-breathe rounded-full bg-[radial-gradient(closest-side,rgba(182,130,53,0.4),transparent_72%)] dark:bg-[radial-gradient(closest-side,rgba(216,169,96,0.32),transparent_72%)]" />
             <div className="relative aspect-square w-[clamp(132px,21.5vw,238px)] rounded-[clamp(30px,4.4vw,52px)] border-2 border-ink bg-paper shadow-[10px_10px_0_0_#201A14] transition-transform duration-[440ms] hover:-translate-y-2.5 hover:shadow-[15px_15px_0_0_#b68235] dark:border-[#f2eee4]/80 dark:bg-[#201c15] dark:shadow-[10px_10px_0_0_#0b0906] dark:hover:shadow-[15px_15px_0_0_#d8a960]">
               <div className="absolute inset-[7px] grid place-items-center rounded-[clamp(24px,3.7vw,45px)] border border-ink/[0.14] dark:border-[#f2eee4]/[0.16]">
-                <ClaudeMark className="h-[42%] w-[42%]" />
+                <span className="relative h-[46%] w-[46%] transition-transform duration-300 ease-out group-hover:rotate-6 group-hover:scale-110">
+                  <Image src="/ai-logos/claude.png" alt="Claude" fill sizes="238px" className="object-contain" />
+                </span>
               </div>
             </div>
           </div>
 
-          <div className="relative z-[1] ml-[clamp(-38px,-3vw,-22px)] animate-bob [animation-delay:1.1s] [animation-duration:10.5s]">
+          <div className="group relative z-[1] ml-[clamp(-38px,-3vw,-22px)] animate-bob [animation-delay:1.1s] [animation-duration:10.5s]">
             <div className="relative aspect-square w-[clamp(92px,14.5vw,162px)] rounded-[clamp(22px,3.2vw,38px)] border-2 border-ink bg-paper shadow-[7px_7px_0_0_#201A14] [transform:rotateY(-22deg)_rotate(7deg)_scale(0.92)] transition-transform duration-[440ms] hover:[transform:rotateY(0deg)_rotate(0deg)_scale(1)] hover:shadow-[11px_11px_0_0_#b68235] dark:border-[#f2eee4]/80 dark:bg-[#201c15] dark:shadow-[7px_7px_0_0_#0b0906] dark:hover:shadow-[11px_11px_0_0_#d8a960]">
               <div className="absolute inset-[6px] grid place-items-center rounded-[clamp(17px,2.6vw,31px)] border border-ink/[0.14] dark:border-[#f2eee4]/[0.16]">
-                <ChatGPTMark className="h-[50%] w-[50%]" />
+                <span className="relative h-[52%] w-[52%] transition-transform duration-300 ease-out group-hover:rotate-6 group-hover:scale-110 dark:invert">
+                  <Image src="/ai-logos/chatgpt.png" alt="ChatGPT" fill sizes="162px" className="object-contain" />
+                </span>
               </div>
             </div>
           </div>
