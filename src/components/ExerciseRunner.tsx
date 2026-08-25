@@ -145,18 +145,37 @@ function TextExercise({ ex, onSolved }: { ex: Extract<Exercise, { type: "improve
   const [result, setResult] = useState<"idle" | "ok" | "fail">("idle");
 
   function check() {
-    // EVALUACIÓN MOCK (heurística simple por longitud y señales).
-    // TODO BACK / APIs: reemplazar por una llamada a OpenAI que
-    // devuelva feedback formativo según ex.criteria.
+    // EVALUACIÓN MOCK (heurística por señales de texto, sin acentos).
+    // TODO BACK / APIs: reemplazar por una llamada a un LLM que evalúe
+    // ex.criteria semánticamente.
+    //
+    // Antes comparaba contra texto en minúsculas SIN sacar tildes, así que
+    // "actúa" (acento en la ú, la forma real de la conjugación) nunca
+    // matcheaba `actu[aá]` (que solo cubre "actua"/"actuá", acento en la
+    // a). Cualquier respuesta bien escrita en español perdía la señal de
+    // rol por eso. Normalizamos sacando diacríticos antes de testear.
     const words = text.trim().split(/\s+/).filter(Boolean).length;
-    const lower = text.toLowerCase();
+    const norm = text
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
     const signals = [
-      /\bactu[aá]|\bsos\b|\bcomo (un|una)\b|\brol\b/.test(lower),
-      /contexto|principiante|experiencia|soy |para /.test(lower),
-      /\d|cinco|tres|lista|tabla|formato|p[aá]rrafo|viñeta/.test(lower),
-      words >= 25,
+      /\bactua|\bactue|\bsos\b|\beres\b|\bse (un|una)\b|\bcomo (un|una)\b|\brol\b/.test(norm),
+      /\bcontexto|\bprincipiante|\bexperiencia|\bpublico|\baudiencia|\bnivel|\bdirigid[oa]|\badolescente|\bnin[oa]|\bnene|\bestudiante|\bedad|\bpara\b/.test(
+        norm
+      ),
+      // Antes solo reconocía "formato/lista/tabla/párrafo/viñeta" (sin
+      // tildes ya era un problema aparte) — "power point", que es un
+      // formato de salida tan válido como cualquiera, no estaba.
+      /\d|\bformato|\blista|\btabla|\bparrafo|\bvineta|\bresumen|power ?point|\bpresentacion|\bdiapositiva|\binforme|\barticulo|\bemail|\bcorreo|\bguion|\bmarkdown|\bcodigo|\bindicador|\bsalida|\bserie|\brepeticion/.test(
+        norm
+      ),
+      // Exigir 25+ palabras (y encima un mínimo de 20 aparte de las
+      // señales) castigaba respuestas cortas pero completas — bajamos la
+      // vara a una que solo filtre respuestas de una línea sin contenido.
+      words >= 15,
     ];
-    const ok = signals.filter(Boolean).length >= 3 && words >= 20;
+    const ok = signals.filter(Boolean).length >= 3;
     setResult(ok ? "ok" : "fail");
     if (ok) onSolved();
   }
