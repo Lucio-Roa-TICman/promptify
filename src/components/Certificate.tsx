@@ -47,6 +47,19 @@ export function Certificate({ defaultName }: { defaultName: string }) {
         scale: 2,
         backgroundColor: "#FFFFFF",
         useCORS: true,
+        onclone: (clonedDoc) => {
+          // html2canvas 1.4.1 tiene un bug conocido con radial-gradient()
+          // en capas + posición/tamaño en porcentaje ("ellipse Nx% Ny% at
+          // X% Y%"): calculateBackgroundRendering puede devolver un ancho
+          // o alto de 0, y createPattern explota con
+          // "The image argument is a canvas element with a width or height of 0".
+          // El degradé es puramente decorativo (un resplandor de fondo), así
+          // que en el clon que se usa solo para la captura lo sacamos y
+          // dejamos el fondo blanco sólido. En pantalla, fuera de este
+          // clon temporal, el degradé sigue mostrándose normalmente.
+          const card = clonedDoc.querySelector<HTMLElement>("[data-cert-card]");
+          if (card) card.style.backgroundImage = "none";
+        },
       });
       const img = canvas.toDataURL("image/png");
       const pdf = new jsPDF({ orientation: "landscape", unit: "px", format: [canvas.width, canvas.height] });
@@ -87,6 +100,7 @@ export function Certificate({ defaultName }: { defaultName: string }) {
       {/* Certificado */}
       <div
         ref={certRef}
+        data-cert-card
         className="relative mx-auto aspect-[1.414/1] w-full max-w-3xl overflow-hidden rounded-[20px] border-2 border-ink bg-paper p-10 md:p-14"
         style={{
           backgroundImage:
