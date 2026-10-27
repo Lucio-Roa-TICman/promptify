@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Wordmark } from "./MoonLogo";
+import { ThemeToggle } from "./ThemeToggle";
 import { authClient } from "@/lib/auth-client";
 
 export function Navbar({
@@ -27,7 +28,7 @@ export function Navbar({
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b-[3px] border-ink bg-cream">
+    <header className="sticky top-0 z-40 border-b-[3px] border-ink bg-cream dark:border-ink/20">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <Link href="/dashboard">
           <Wordmark size={19} />
@@ -51,6 +52,7 @@ export function Navbar({
           {userName && (
             <span className="hidden text-sm text-muted sm:inline">{userName}</span>
           )}
+          <ThemeToggle />
           <button
             onClick={handleSignOut}
             className="rounded-full border-2 border-ink/20 px-3 py-1.5 text-xs font-semibold text-muted transition-colors hover:border-ink hover:text-ink"

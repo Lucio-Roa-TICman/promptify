@@ -10,7 +10,7 @@ type ButtonProps = {
 
 const VARIANTS: Record<NonNullable<ButtonProps["variant"]>, string> = {
   primary:
-    "bg-kiddo-orange text-white shadow-[4px_4px_0_0_#201A14] hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_#201A14]",
+    "bg-kiddo-orange text-white shadow-[4px_4px_0_0_rgb(var(--shadow-ink))] hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_rgb(var(--shadow-ink))]",
   secondary: "bg-paper text-ink hover:-translate-y-0.5 hover:bg-sand",
 };
 

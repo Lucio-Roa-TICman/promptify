@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Wordmark } from "./MoonLogo";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function AuthShell({
   title,
@@ -14,6 +15,9 @@ export function AuthShell({
 }) {
   return (
     <div className="flex min-h-screen items-center justify-center px-6 py-12">
+      <div className="fixed right-4 top-4 z-20 sm:right-6 sm:top-6">
+        <ThemeToggle />
+      </div>
       {/* glow ambiente */}
       <div
         className="pointer-events-none fixed left-1/2 top-0 -z-0 h-[500px] w-[700px] -translate-x-1/2"

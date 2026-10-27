@@ -1,39 +1,39 @@
 import type { Config } from "tailwindcss";
 
+// Helper: color que lee una variable CSS "R G B" y admite opacidad.
+const themed = (name: string) => `rgb(var(--${name}) / <alpha-value>)`;
+
 const config: Config = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
-  // Etapa 1 del rediseño Kiddo x Promptify: la landing soporta un toggle
-  // claro/oscuro propio (data-theme en <html>, ver LandingNav). El resto
-  // del sitio no usa variantes dark: todavía, así que este selector queda
-  // inerte fuera de la landing.
+  // El tema claro/oscuro se controla con data-theme en <html> (ver
+  // ThemeToggle y el script de layout.tsx). Los colores base son variables
+  // CSS definidas en globals.css, así que cambian solos en TODAS las
+  // pantallas cuando cambia el tema.
   darkMode: ["selector", '[data-theme="dark"]'],
   theme: {
     extend: {
       colors: {
-        // Fase 2: estos tokens ya no son un tema oscuro aparte — quedan
-        // repintados a los mismos valores cálidos "kiddo" de abajo, para
-        // que /login, /register, /dashboard, /curso y /certificado hereden
-        // la paleta de la landing sin tocar cada className uno por uno.
-        bg: "#F2EFE4",
-        "bg-soft": "#EAE0CC",
-        surface: "#FFFFFF",
-        "surface-2": "#EAE0CC",
+        // Tokens que cambian con el tema (valores en globals.css).
+        // Usan el formato "rgb(var(--x) / <alpha-value>)" para que
+        // siga funcionando la opacidad, ej: border-ink/15, bg-sand/60.
+        bg: themed("bg"),
+        "bg-soft": themed("sand"),
+        surface: themed("paper"),
+        "surface-2": themed("sand"),
         blue: { DEFAULT: "#045699", light: "#FF7A0D" },
-        pink: "#B5622E",
-        text: "#201A14",
-        muted: "#6B6255",
-        dim: "#9C9483",
-        line: "rgba(32,26,20,0.12)",
-        "line-strong": "rgba(32,26,20,0.24)",
+        pink: themed("clay"),
+        text: themed("ink"),
+        muted: themed("muted"),
+        dim: themed("dim"),
+        line: "rgb(var(--ink) / 0.12)",
+        "line-strong": "rgb(var(--ink) / 0.24)",
 
-        // Paleta "kiddo" — nace en la landing, ahora es la paleta de toda
-        // la app (cálida/tierra, el azul queda como acento puntual, no
-        // como fondo de sección)
-        cream: "#F2EFE4",
-        sand: "#EAE0CC",
-        paper: "#FFFFFF",
-        ink: "#201A14",
-        clay: "#B5622E",
+        // Paleta "kiddo"
+        cream: themed("bg"),
+        sand: themed("sand"),
+        paper: themed("paper"),
+        ink: themed("ink"),
+        clay: themed("clay"),
         kiddo: {
           orange: "#FF7A0D",
           "orange-dark": "#E36700",
