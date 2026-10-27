@@ -58,7 +58,7 @@ export function Wordmark({ size = 21 }: { size?: number }) {
     <span className="flex items-center gap-[11px]">
       <MoonLogo size={size + 9} />
       <span
-        className="font-serif font-semibold tracking-[-0.01em]"
+        className="font-sans font-semibold tracking-[-0.01em]"
         style={{ fontSize: size }}
       >
         Promptify
