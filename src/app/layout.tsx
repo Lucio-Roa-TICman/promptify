@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   keywords: ["prompts", "ingeniería de prompts", "curso de IA", "inteligencia artificial", "prompt engineering"],
   openGraph: {
     title: "Promptify — Aprendé a ver el brillo de la IA",
-    description: "Curso interactivo de ingeniería de prompts. 7 módulos, 20 minutos, certificado al terminar.",
+    description: "Curso interactivo de ingeniería de prompts. 13 módulos, 20 minutos, certificado al terminar.",
     type: "website",
     locale: "es_AR",
   },
