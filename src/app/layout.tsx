@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Promptify — Aprendé a ver el brillo de la IA",
   description:
-    "Curso interactivo de ingeniería de prompts en español. 7 módulos, 20 minutos, práctica real y certificado. Aprendé a comunicarte con la IA.",
+    "Curso interactivo de ingeniería de prompts en español. 13 módulos, 20 minutos, práctica real y certificado. Aprendé a comunicarte con la IA.",
   keywords: ["prompts", "ingeniería de prompts", "curso de IA", "inteligencia artificial", "prompt engineering"],
   openGraph: {
     title: "Promptify — Aprendé a ver el brillo de la IA",
